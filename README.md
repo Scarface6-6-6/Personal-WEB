@@ -15,7 +15,7 @@ Abre `index.html` en el navegador.
 
 ## GitHub Pages
 
-El sitio se publica automaticamente con GitHub Actions cuando haces push a `main` o `Feature/Develop`. Tambien se puede ejecutar manualmente desde la pestana Actions en GitHub.
+El sitio se publica automaticamente con GitHub Actions cuando haces push a `main`. Tambien se puede ejecutar manualmente desde la pestana Actions en GitHub.
 
 Antes del primer despliegue, activa Pages en GitHub:
 
@@ -24,7 +24,7 @@ Antes del primer despliegue, activa Pages en GitHub:
 3. En `Build and deployment`, selecciona `GitHub Actions` como fuente.
 4. Vuelve a ejecutar el workflow `Deploy GitHub Pages`.
 
-Si Pages no esta habilitado, el workflow falla con `Get Pages site failed`. Eso se corrige activando Pages una sola vez desde la configuracion del repositorio.
+Si Pages no esta habilitado, el workflow falla con `Failed to create deployment` o `Get Pages site failed`. Eso se corrige activando Pages una sola vez desde la configuracion del repositorio.
 
 ## Sonar
 
