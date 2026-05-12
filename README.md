@@ -24,6 +24,11 @@ Antes del primer despliegue, activa Pages en GitHub:
 3. En `Build and deployment`, selecciona `GitHub Actions` como fuente.
 4. Vuelve a ejecutar el workflow `Deploy GitHub Pages`.
 
+Tambien puedes dejar que el workflow intente habilitar Pages automaticamente. Para eso agrega un secret llamado `PAGES_TOKEN` con un token distinto a `GITHUB_TOKEN` y permisos para administrar Pages:
+
+- Fine-grained personal access token: acceso al repositorio y permiso `Pages: Read and write`.
+- Classic personal access token: scope `repo`.
+
 ## Sonar
 
 El analisis de codigo corre con GitHub Actions en cada push o pull request.
