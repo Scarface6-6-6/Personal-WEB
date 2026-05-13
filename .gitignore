@@ -1,0 +1,20 @@
+# IDE
+.vscode/
+.idea/
+*.swp
+
+# Node/npm (si usas)
+node_modules/
+package-lock.json
+
+# Build
+dist/
+build/
+*.class
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

@@ -6,9 +6,14 @@
   --text: #f4f0e8;
   --muted: #b9b0a2;
   --line: rgba(244, 240, 232, 0.12);
-  --accent: #d7f171;
+  --accent: #9b6ee8;
   --accent-two: #72d6c9;
+  --accent-gradient: linear-gradient(180deg, #a77bee 0%, #704aa8 100%);
   --accent-three: #f08f6e;
+  --glow-primary: rgba(155, 110, 232, 0.24);
+  --glow-secondary: rgba(112, 74, 168, 0.2);
+  --accent-soft: rgba(155, 110, 232, 0.28);
+  --accent-border: rgba(155, 110, 232, 0.42);
 }
 
 * {
@@ -20,8 +25,8 @@ body {
   margin: 0;
   overflow-x: hidden;
   background:
-    radial-gradient(circle at 20% 10%, rgba(215, 241, 113, 0.18), transparent 30%),
-    radial-gradient(circle at 88% 88%, rgba(114, 214, 201, 0.14), transparent 32%),
+    radial-gradient(circle at 16% 8%, var(--glow-primary), transparent 34%),
+    radial-gradient(circle at 88% 88%, var(--glow-secondary), transparent 36%),
     var(--bg);
   color: var(--text);
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -80,22 +85,29 @@ a {
 
 .profile {
   display: grid;
-  grid-template-columns: 64px 1fr;
+  grid-template-columns: 140px 1fr;
   gap: 1rem;
   align-items: start;
 }
 
 .avatar {
   display: grid;
-  width: 64px;
-  aspect-ratio: 1;
+  width: 140px;
+  aspect-ratio: 0.80;
   place-items: center;
-  border: 1px solid rgba(215, 241, 113, 0.36);
+  border: 1px solid var(--accent-border);
   border-radius: 8px;
-  background: linear-gradient(135deg, rgba(215, 241, 113, 0.24), rgba(114, 214, 201, 0.14));
+  background: linear-gradient(135deg, var(--accent-soft), rgba(112, 74, 168, 0.14));
   color: var(--accent);
   font-size: 1.6rem;
   font-weight: 800;
+  overflow: hidden;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .eyebrow {
@@ -109,22 +121,29 @@ a {
 
 h1,
 h2,
+h3,
 p {
   margin-top: 0;
 }
 
 h1 {
   margin-bottom: 0.45rem;
-  font-size: 1.4rem;
+  font-size: 1.1rem;
 }
 
 h2 {
   max-width: 760px;
-  margin-bottom: 1rem;
+  margin-bottom: .70rem;
   font-size: clamp(2rem, 5vw, 5.4rem);
   line-height: 0.96;
 }
-
+h3 {
+  max-width: 760px;
+  margin-bottom: 1.4rem;
+  font-size: clamp(1rem, 4vw, 1.4rem);
+  text-align: justify;
+  line-height: 1.7;
+}
 p {
   color: var(--muted);
   line-height: 1.7;
@@ -166,7 +185,7 @@ p {
 
 .menu-item:hover,
 .menu-item.active {
-  border-color: rgba(215, 241, 113, 0.25);
+  border-color: rgba(155, 110, 232, 0.3);
   background: rgba(244, 240, 232, 0.06);
   color: var(--text);
   transform: translateX(4px);
@@ -235,10 +254,10 @@ p {
   width: 170px;
   aspect-ratio: 1;
   translate: -50% -50%;
-  border: 1px solid rgba(215, 241, 113, 0.42);
+  border: 1px solid var(--accent-border);
   border-radius: 999px;
   background:
-    radial-gradient(circle, rgba(215, 241, 113, 0.3), transparent 58%),
+    radial-gradient(circle, var(--accent-soft), transparent 58%),
     rgba(244, 240, 232, 0.03);
   animation: breathe 3.5s ease-in-out infinite;
 }
@@ -328,7 +347,7 @@ p {
 }
 
 .link-list a:hover {
-  border-color: rgba(215, 241, 113, 0.45);
+  border-color: var(--accent-border);
   transform: translateY(-2px);
 }
 
@@ -352,7 +371,7 @@ p {
 @keyframes breathe {
   50% {
     transform: scale(1.12);
-    box-shadow: 0 0 70px rgba(215, 241, 113, 0.16);
+    box-shadow: 0 0 70px var(--glow-primary);
   }
 }
 
