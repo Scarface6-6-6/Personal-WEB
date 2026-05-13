@@ -34,6 +34,7 @@ jobs:
         run: |
           mkdir _site
           cp index.html _site/
+          cp CNAME _site/
           cp .nojekyll _site/
           cp -R Styles _site/
           cp -R JavaScript _site/

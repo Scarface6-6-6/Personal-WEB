@@ -17,6 +17,10 @@ Abre `index.html` en el navegador.
 
 El sitio se publica automaticamente con GitHub Actions cuando haces push a `main`. Tambien se puede ejecutar manualmente desde la pestana Actions en GitHub.
 
+Dominio configurado:
+
+- `scarface-666.pw`
+
 Antes del primer despliegue, activa Pages en GitHub:
 
 1. Entra a `Settings`.
@@ -25,6 +29,15 @@ Antes del primer despliegue, activa Pages en GitHub:
 4. Vuelve a ejecutar el workflow `Deploy GitHub Pages`.
 
 Si Pages no esta habilitado, el workflow falla con `Failed to create deployment` o `Get Pages site failed`. Eso se corrige activando Pages una sola vez desde la configuracion del repositorio.
+
+Para enlazar el dominio, configura estos registros DNS con tu proveedor:
+
+- `A` para `scarface-666.pw` apuntando a `185.199.108.153`
+- `A` para `scarface-666.pw` apuntando a `185.199.109.153`
+- `A` para `scarface-666.pw` apuntando a `185.199.110.153`
+- `A` para `scarface-666.pw` apuntando a `185.199.111.153`
+
+Opcionalmente, para `www.scarface-666.pw`, agrega un `CNAME` desde `www` hacia `Scarface6-6-6.github.io`.
 
 ## Sonar
 
