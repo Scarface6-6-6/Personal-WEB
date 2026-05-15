@@ -9,35 +9,12 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
+      integrity="sha384-4v3ygGkNd6oBKSuEcWYGK2XvfZNodeA0BoPVQBWDmT3CfkklVpw5e7N0L3uXf3ZY"
+      crossorigin="anonymous"
     />
-    <link rel="stylesheet" href="Styles/styles.css" />
   </head>
   <body>
-    <div class="ambient ambient-one"></div>
-    <div class="ambient ambient-two"></div>
-
-    <main class="shell">
-      <aside class="sidebar" aria-label="Menu principal">
-        <section class="profile">
-          <div class="avatar" aria-hidden="true"><img src="Images/profile.jpeg" /></div>
-          <div>
-            <p class="eyebrow">Profile</p>
-            <h1>Scarface_666</h1>
-            <p class="profile-text">Un espacio personal para contar lo que soy, lo que me gusta y lo que voy descubriendo.</p>
-          </div>
-        </section>
-
-        <nav class="menu" aria-label="Pantallas" data-menu></nav>
-
-        <footer class="sidebar-footer">
-          <span class="status-dot"></span>
-          <span>Editando poco a poco</span>
-        </footer>
-      </aside>
-
-      <section class="content" aria-live="polite" data-screens></section>
-    </main>
-
-    <script type="module" src="JavaScript/script.js"></script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

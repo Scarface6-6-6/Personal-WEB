@@ -1,7 +1,7 @@
 {
   "name": "personal-web",
   "version": "1.0.0",
-  "description": "Personal website with vanilla JavaScript",
+  "description": "Personal website with React",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,11 +12,16 @@
     "test:coverage": "vitest --coverage"
   },
   "devDependencies": {
-    "@vitejs/plugin-vue": "^6.0.6",
+    "@vitejs/plugin-react": "^6.0.2",
     "@vitest/coverage-v8": "^4.1.6",
     "@vitest/ui": "^4.1.6",
     "jsdom": "^29.1.1",
-    "vite": "^8.0.12",
+    "vite": "^8.0.13",
     "vitest": "^4.1.6"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.15.0"
   }
 }

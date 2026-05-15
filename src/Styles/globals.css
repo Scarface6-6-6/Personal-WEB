@@ -1,0 +1,142 @@
+:root {
+  color-scheme: dark;
+  --bg: #111210;
+  --panel: rgba(27, 28, 24, 0.82);
+  --panel-strong: rgba(38, 39, 33, 0.92);
+  --text: #f4f0e8;
+  --muted: #b9b0a2;
+  --line: rgba(244, 240, 232, 0.12);
+  --accent: #9b6ee8;
+  --accent-two: #72d6c9;
+  --accent-gradient: linear-gradient(180deg, #a77bee 0%, #704aa8 100%);
+  --accent-three: #f08f6e;
+  --glow-primary: rgba(155, 110, 232, 0.24);
+  --glow-secondary: rgba(112, 74, 168, 0.2);
+  --accent-soft: rgba(155, 110, 232, 0.28);
+  --accent-border: rgba(155, 110, 232, 0.42);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 16% 8%, var(--glow-primary), transparent 34%),
+    radial-gradient(circle at 88% 88%, var(--glow-secondary), transparent 36%),
+    var(--bg);
+  color: var(--text);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+button,
+a {
+  font: inherit;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+.ambient {
+  position: fixed;
+  width: 26rem;
+  height: 26rem;
+  border: 1px solid rgba(244, 240, 232, 0.08);
+  border-radius: 999px;
+  pointer-events: none;
+  animation: drift 14s ease-in-out infinite alternate;
+}
+
+.ambient-one {
+  left: -10rem;
+  top: -8rem;
+}
+
+.ambient-two {
+  right: -12rem;
+  bottom: -10rem;
+  animation-delay: -5s;
+}
+
+.shell {
+  display: grid;
+  grid-template-columns: 320px minmax(0, 1fr);
+  gap: 1rem;
+  width: min(1180px, calc(100% - 2rem));
+  min-height: calc(100vh - 2rem);
+  margin: 1rem auto;
+}
+
+.content {
+  border: 1px solid var(--line);
+  background: var(--panel);
+  backdrop-filter: blur(22px);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+}
+
+.eyebrow {
+  margin: 0 0 0.45rem;
+  color: var(--accent);
+  font-size: 0.90rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.screen {
+  display: none;
+  padding: 2rem;
+}
+
+.screen.active {
+  display: grid;
+  gap: 1rem;
+  animation: screenIn 300ms ease;
+}
+
+@keyframes screenIn {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drift {
+  to {
+    transform: translate3d(2rem, 1.5rem, 0) rotate(12deg);
+  }
+}
+
+@media (max-width: 860px) {
+  .shell {
+    grid-template-columns: 1fr;
+  }
+
+  #home.active {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .shell {
+    width: min(100% - 1rem, 1180px);
+    min-height: calc(100vh - 1rem);
+    margin: 0.5rem auto;
+  }
+}

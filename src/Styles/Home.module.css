@@ -1,0 +1,100 @@
+.heroCopy {
+  display: grid;
+  gap: 1rem;
+}
+
+.heroCopy h2 {
+  max-width: 760px;
+  margin-bottom: 0.70rem;
+  font-size: clamp(2rem, 5vw, 5.4rem);
+  line-height: 0.96;
+}
+
+.heroCopy h3 {
+  max-width: 760px;
+  margin-bottom: 1.4rem;
+  font-size: clamp(1rem, 4vw, 1.4rem);
+  text-align: justify;
+  line-height: 1.7;
+}
+
+.heroCopy p {
+  max-width: 640px;
+  font-size: 1.05rem;
+}
+
+.motionPanel {
+  position: relative;
+  min-height: 420px;
+  border-left: 1px solid var(--line);
+}
+
+.pulseCore {
+  position: absolute;
+  inset: 50% auto auto 50%;
+  width: 170px;
+  aspect-ratio: 1;
+  translate: -50% -50%;
+  border: 1px solid var(--accent-border);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle, var(--accent-soft), transparent 58%),
+    rgba(244, 240, 232, 0.03);
+  animation: breathe 3.5s ease-in-out infinite;
+}
+
+.floatingCard {
+  position: absolute;
+  min-width: 96px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--panel-strong);
+  color: var(--text);
+  padding: 0.8rem 1rem;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  animation: float 5s ease-in-out infinite;
+}
+
+.cardOne {
+  left: 14%;
+  top: 18%;
+}
+
+.cardTwo {
+  right: 8%;
+  top: 42%;
+  color: var(--accent-two);
+  animation-delay: -1.4s;
+}
+
+.cardThree {
+  left: 28%;
+  bottom: 16%;
+  color: var(--accent-three);
+  animation-delay: -2.6s;
+}
+
+@keyframes breathe {
+  50% {
+    transform: scale(1.12);
+    box-shadow: 0 0 70px var(--glow-primary);
+  }
+}
+
+@keyframes float {
+  50% {
+    transform: translateY(-18px);
+  }
+}
+
+@media (max-width: 860px) {
+  .motionPanel {
+    min-height: 260px;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+}

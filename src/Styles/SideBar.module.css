@@ -1,0 +1,131 @@
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  backdrop-filter: blur(22px);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+  border-radius: 8px;
+}
+
+.profile {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 1rem;
+  align-items: start;
+}
+
+.avatar {
+  display: grid;
+  width: 140px;
+  aspect-ratio: 0.80;
+  place-items: center;
+  border: 1px solid var(--accent-border);
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent-soft), rgba(112, 74, 168, 0.14));
+  color: var(--accent);
+  font-size: 1.6rem;
+  font-weight: 800;
+  overflow: hidden;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profileText {
+  margin: 0 0 0.45rem;
+  color: var(--accent);
+  font-size: 0.90rem;
+  font-weight: 800;
+  text-align: justify;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.profileDescription {
+  margin-bottom: 0;
+  color: var(--muted);
+  text-align: justify;
+  font-size: 0.92rem;
+  line-height: 1.7;
+}
+
+.menu {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.menuItem {
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0 1rem;
+  text-align: left;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, color 180ms ease;
+}
+
+.menuItem::after {
+  content: "";
+  width: 8px;
+  aspect-ratio: 1;
+  border-radius: 999px;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+.menuItem:hover,
+.menuItem.active {
+  border-color: rgba(155, 110, 232, 0.3);
+  background: rgba(244, 240, 232, 0.06);
+  color: var(--text);
+  transform: translateX(4px);
+}
+
+.menuItem.active::after {
+  color: var(--accent);
+  opacity: 1;
+}
+
+@media (max-width: 860px) {
+  .sidebar {
+    position: static;
+  }
+
+  .menu {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .menuItem {
+    justify-content: center;
+  }
+
+  .menuItem::after {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .profile {
+    grid-template-columns: 1fr;
+  }
+
+  .menu {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .menuItem {
+    min-height: 44px;
+    padding: 0 0.75rem;
+  }
+}
