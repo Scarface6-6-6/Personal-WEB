@@ -1,124 +1,72 @@
-# Personal Web - Portfolio
+# Personal Web
 
-Un portafolio personal moderno construido con **React**, **Vite** y **React Router**.
+Portafolio personal construido con React, Vite y React Router.
 
-## 🚀 Características
+## Stack
 
-- ⚡ **Vite**: Build tool rápido y moderno
-- ⚛️ **React 18**: Última versión de React
-- 🔀 **React Router v7**: Navegación SPA
-- 🎨 **Diseño moderno**: Interfaz limpia y responsiva
-- 📱 **Mobile-first**: Completamente responsive
-- ✅ **Vitest**: Testing framework incluido
+- React 18
+- Vite 8
+- React Router DOM 7
+- Vitest 4 + jsdom
+- SonarCloud (GitHub Actions)
+- GitHub Pages (deploy automatico desde `main`)
 
-## 📁 Estructura del Proyecto
+## Estructura
 
-```
+```text
 Personal-WEB/
-├── src/
-│   ├── components/       # Componentes reutilizables
-│   │   └── Navbar.jsx
-│   ├── pages/           # Páginas de la aplicación
-│   │   ├── Home.jsx
-│   │   ├── About.jsx
-│   │   ├── Gustos.jsx
-│   │   ├── Galeria.jsx
-│   │   └── redes.jsx
-│   ├── data/            # Datos estáticos
-│   │   └── gustos.js
-│   ├── Styles/          # Estilos CSS
-│   │   ├── styles.css
-│   │   ├── navbar.css
-│   │   └── pages.css
-│   ├── tests/           # Tests
-│   │   └── setup.js
-│   ├── Images/          # Imágenes
-│   ├── App.jsx          # Componente principal
-│   └── main.jsx         # Entry point
-├── index.html           # HTML principal
-├── vite.config.js       # Configuración de Vite
-├── vitest.config.js     # Configuración de tests
-└── package.json
++-- .github/workflows/
+�   +-- pages.yml
+�   +-- sonar.yml
++-- src/
+�   +-- assets/
+�   +-- components/
+�   +-- data/
+�   +-- pages/
+�   +-- Styles/
+�   +-- tests/
+�   +-- utils/
+�   +-- App.jsx
+�   +-- main.jsx
++-- CNAME
++-- index.html
++-- package.json
++-- sonar-project.properties
++-- vite.config.js
++-- vitest.config.js
 ```
 
-## 🛠️ Instalación
+## Comandos
 
-### Requisitos previos
-- Node.js 16+ instalado
-
-### Pasos
-
-1. **Clonar el repositorio**
-   ```bash
-   git clone <tu-repositorio>
-   cd Personal-WEB
-   ```
-
-2. **Instalar dependencias**
-   ```bash
-   npm install
-   ```
-
-3. **Iniciar el servidor de desarrollo**
-   ```bash
-   npm run dev
-   ```
-
-   La aplicación se abrirá automáticamente en `http://localhost:3000`
-
-## 📦 Scripts disponibles
-
-- `npm run dev` - Inicia el servidor de desarrollo
-- `npm run build` - Genera la versión optimizada para producción
-- `npm run preview` - Previsualiza la versión compilada
-- `npm run test` - Ejecuta los tests
-- `npm run test:ui` - Ejecuta tests con interfaz gráfica
-- `npm run test:coverage` - Genera reporte de cobertura
-
-## 🎨 Tecnologías
-
-- **React** - Librería UI
-- **React Router DOM** - Navegación
-- **Vite** - Build tool
-- **Vitest** - Testing framework
-- **CSS3** - Estilos con variables CSS personalizadas
-
-## 📱 Páginas incluidas
-
-- **Home** - Página de inicio con presentación
-- **About** - Información personal
-- **Gustos** - Música y comida favorita
-- **Galería** - Galería de imágenes
-- **Redes** - Enlaces a redes sociales
-
-## 🎨 Personalización
-
-### Variables CSS
-En `src/Styles/pages.css` puedes personalizar los colores:
-
-```css
-:root {
-  --primary-color: #00d4ff;      /* Color principal */
-  --secondary-color: #1a1a2e;   /* Color secundario */
-  --text-color: #e0e0e0;         /* Color del texto */
-  --bg-color: #0f0f1e;           /* Color de fondo */
-  --border-color: #2a2a3e;       /* Color de bordes */
-}
+```bash
+npm install
+npm run dev
+npm run build
+npm run preview
+npm test
+npm run test:coverage
 ```
 
-## 🚀 Despliegue
+## Deploy (GitHub Pages)
 
-### GitHub Pages
+El workflow `pages.yml`:
 
-El sitio se publica automáticamente con GitHub Actions. Configura tu dominio personalizado en los ajustes del repositorio.
+1. instala dependencias (`npm ci`)
+2. genera build (`npm run build`)
+3. publica `dist/` en GitHub Pages
 
-## 📝 Licencia
+Tambien copia `CNAME` y `.nojekyll` a `dist/` antes de publicar.
 
-Este proyecto es de código abierto bajo la licencia MIT.
+## Calidad (SonarCloud)
 
-## 👨‍💻 Autor
+El workflow `sonar.yml` usa:
 
-Scarface_666 - Un espacio personal para contar lo que soy, lo que me gusta y lo que voy descubriendo.
-- `SONAR_HOST_URL`: variable opcional. Si no existe, usa `https://sonarcloud.io`.
+- `SONAR_TOKEN` (secret)
+- `SONAR_PROJECT_KEY` (repository variable)
+- `SONAR_ORGANIZATION` (repository variable)
+- `SONAR_HOST_URL` opcional (default: `https://sonarcloud.io`)
 
-Si el analisis falla con `Organization key does not exist`, revisa la organization key en la URL de SonarCloud. En una URL como `https://sonarcloud.io/project/overview?id=...&organization=...`, el valor despues de `organization=` es el que debe ir en `SONAR_ORGANIZATION`.
+## Notas
+
+- No edites `dist/` ni `coverage/`: son artefactos generados.
+- En imports, respeta mayusculas/minusculas exactas de carpetas y archivos (importante para Linux/CI).
