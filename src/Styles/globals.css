@@ -1,4 +1,4 @@
-﻿* {
+* {
   box-sizing: border-box;
 }
 
@@ -9,7 +9,7 @@ body {
     radial-gradient(circle at 88% 12%, rgba(72, 44, 160, 0.22), transparent 30%),
     var(--bg);
   color: var(--text);
-  font-family: "Poppins", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 button {
   font: inherit;

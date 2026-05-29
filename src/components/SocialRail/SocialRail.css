@@ -8,29 +8,45 @@
 }
 
 .social-line {
-  width: 2px;
-  height: 62%;
+  width: 4px;
+  flex: 1;
   background: linear-gradient(
-    to bottom,
-    transparent,
-    rgba(167, 107, 255, 0.9),
+    to top,
+    rgba(167, 107, 255, 1),
+    rgba(167, 107, 255, 0.8),
+    rgba(167, 107, 255, 0.3),
     transparent
   );
+  border-radius: 999px;
 }
 
 .social-icons {
-  margin-top: auto;
+  margin-top: 24px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  font-size: 48px;
-  line-height: 1;
-  color: #f3f3fa;
+  gap: 32px;
+}
+
+.social-link {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 28px;
+  transition: transform 0.3s ease;
+}
+
+.social-link img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.social-link:hover {
+  transform: translateX(4px);
 }
 
 @media (max-width: 1200px) {
   .social-rail {
-    position: static;
-    height: auto;
+    display: none;
   }
 }
