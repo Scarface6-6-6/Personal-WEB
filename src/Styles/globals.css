@@ -7,18 +7,10 @@ body {
   background:
     radial-gradient(circle at 0% 92%, rgba(120, 70, 255, 0.28), transparent 34%),
     radial-gradient(circle at 88% 12%, rgba(72, 44, 160, 0.22), transparent 30%),
-    repeating-linear-gradient(
-      90deg,
-      rgba(12, 15, 34, 0.56),
-      rgba(12, 15, 34, 0.56) 2px,
-      transparent 2px,
-      transparent 18px
-    ),
     var(--bg);
   color: var(--text);
   font-family: "Poppins", sans-serif;
 }
-
 button {
   font: inherit;
   cursor: pointer;
