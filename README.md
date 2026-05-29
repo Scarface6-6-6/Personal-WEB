@@ -1,53 +1,124 @@
-# Mi Proyecto Web Personal
+# Personal Web - Portfolio
 
-Sitio web personal estatico creado con HTML, CSS y JavaScript.
+Un portafolio personal moderno construido con **React**, **Vite** y **React Router**.
 
-## Estructura
+## 🚀 Características
 
-- `index.html`: pagina principal del sitio.
-- `Styles/styles.css`: estilos visuales.
-- `JavaScript/script.js`: interacciones de navegacion.
-- `.github/workflows/pages.yml`: despliegue automatico a GitHub Pages.
+- ⚡ **Vite**: Build tool rápido y moderno
+- ⚛️ **React 18**: Última versión de React
+- 🔀 **React Router v7**: Navegación SPA
+- 🎨 **Diseño moderno**: Interfaz limpia y responsiva
+- 📱 **Mobile-first**: Completamente responsive
+- ✅ **Vitest**: Testing framework incluido
 
-## Uso local
+## 📁 Estructura del Proyecto
 
-Abre `index.html` en el navegador.
+```
+Personal-WEB/
+├── src/
+│   ├── components/       # Componentes reutilizables
+│   │   └── Navbar.jsx
+│   ├── pages/           # Páginas de la aplicación
+│   │   ├── Home.jsx
+│   │   ├── About.jsx
+│   │   ├── Gustos.jsx
+│   │   ├── Galeria.jsx
+│   │   └── redes.jsx
+│   ├── data/            # Datos estáticos
+│   │   └── gustos.js
+│   ├── Styles/          # Estilos CSS
+│   │   ├── styles.css
+│   │   ├── navbar.css
+│   │   └── pages.css
+│   ├── tests/           # Tests
+│   │   └── setup.js
+│   ├── Images/          # Imágenes
+│   ├── App.jsx          # Componente principal
+│   └── main.jsx         # Entry point
+├── index.html           # HTML principal
+├── vite.config.js       # Configuración de Vite
+├── vitest.config.js     # Configuración de tests
+└── package.json
+```
 
-## GitHub Pages
+## 🛠️ Instalación
 
-El sitio se publica automaticamente con GitHub Actions cuando haces push a `main`. Tambien se puede ejecutar manualmente desde la pestana Actions en GitHub.
+### Requisitos previos
+- Node.js 16+ instalado
 
-Dominio configurado:
+### Pasos
 
-- `scarface-666.pw`
+1. **Clonar el repositorio**
+   ```bash
+   git clone <tu-repositorio>
+   cd Personal-WEB
+   ```
 
-Antes del primer despliegue, activa Pages en GitHub:
+2. **Instalar dependencias**
+   ```bash
+   npm install
+   ```
 
-1. Entra a `Settings`.
-2. Abre `Pages`.
-3. En `Build and deployment`, selecciona `GitHub Actions` como fuente.
-4. Vuelve a ejecutar el workflow `Deploy GitHub Pages`.
+3. **Iniciar el servidor de desarrollo**
+   ```bash
+   npm run dev
+   ```
 
-Si Pages no esta habilitado, el workflow falla con `Failed to create deployment` o `Get Pages site failed`. Eso se corrige activando Pages una sola vez desde la configuracion del repositorio.
+   La aplicación se abrirá automáticamente en `http://localhost:3000`
 
-Para enlazar el dominio, configura estos registros DNS con tu proveedor:
+## 📦 Scripts disponibles
 
-- `A` para `scarface-666.pw` apuntando a `185.199.108.153`
-- `A` para `scarface-666.pw` apuntando a `185.199.109.153`
-- `A` para `scarface-666.pw` apuntando a `185.199.110.153`
-- `A` para `scarface-666.pw` apuntando a `185.199.111.153`
+- `npm run dev` - Inicia el servidor de desarrollo
+- `npm run build` - Genera la versión optimizada para producción
+- `npm run preview` - Previsualiza la versión compilada
+- `npm run test` - Ejecuta los tests
+- `npm run test:ui` - Ejecuta tests con interfaz gráfica
+- `npm run test:coverage` - Genera reporte de cobertura
 
-Opcionalmente, para `www.scarface-666.pw`, agrega un `CNAME` desde `www` hacia `Scarface6-6-6.github.io`.
+## 🎨 Tecnologías
 
-## Sonar
+- **React** - Librería UI
+- **React Router DOM** - Navegación
+- **Vite** - Build tool
+- **Vitest** - Testing framework
+- **CSS3** - Estilos con variables CSS personalizadas
 
-El analisis de codigo corre con GitHub Actions en cada push o pull request.
+## 📱 Páginas incluidas
 
-Configura estos valores en GitHub antes de ejecutar el workflow:
+- **Home** - Página de inicio con presentación
+- **About** - Información personal
+- **Gustos** - Música y comida favorita
+- **Galería** - Galería de imágenes
+- **Redes** - Enlaces a redes sociales
 
-- `SONAR_TOKEN`: secret del repositorio con el token de Sonar.
-- `SONAR_PROJECT_KEY`: variable del repositorio con la key del proyecto en Sonar.
-- `SONAR_ORGANIZATION`: variable del repositorio con la organization key exacta de SonarCloud. Prueba primero `scarface6-6-6`; el nombre visible puede aparecer como `Scarface6-6-6`, pero la key suele ir en minusculas.
+## 🎨 Personalización
+
+### Variables CSS
+En `src/Styles/pages.css` puedes personalizar los colores:
+
+```css
+:root {
+  --primary-color: #00d4ff;      /* Color principal */
+  --secondary-color: #1a1a2e;   /* Color secundario */
+  --text-color: #e0e0e0;         /* Color del texto */
+  --bg-color: #0f0f1e;           /* Color de fondo */
+  --border-color: #2a2a3e;       /* Color de bordes */
+}
+```
+
+## 🚀 Despliegue
+
+### GitHub Pages
+
+El sitio se publica automáticamente con GitHub Actions. Configura tu dominio personalizado en los ajustes del repositorio.
+
+## 📝 Licencia
+
+Este proyecto es de código abierto bajo la licencia MIT.
+
+## 👨‍💻 Autor
+
+Scarface_666 - Un espacio personal para contar lo que soy, lo que me gusta y lo que voy descubriendo.
 - `SONAR_HOST_URL`: variable opcional. Si no existe, usa `https://sonarcloud.io`.
 
 Si el analisis falla con `Organization key does not exist`, revisa la organization key en la URL de SonarCloud. En una URL como `https://sonarcloud.io/project/overview?id=...&organization=...`, el valor despues de `organization=` es el que debe ir en `SONAR_ORGANIZATION`.

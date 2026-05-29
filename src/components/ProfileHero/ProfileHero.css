@@ -1,0 +1,24 @@
+﻿.profile-hero {
+  width: min(1370px, 100%);
+  margin: 40px auto 0;
+  padding: 10px;
+}
+
+.profile-img {
+  width: 100%;
+  height: 900px;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 14px;
+  display: block;
+}
+
+@media (max-width: 1200px) {
+  .profile-hero {
+    width: 100%;
+  }
+
+  .profile-img {
+    height: 500px;
+  }
+}

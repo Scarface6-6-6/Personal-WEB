@@ -1,0 +1,9 @@
+﻿:root {
+  --bg: #080b16;
+  --panel: rgba(13, 16, 31, 0.78);
+  --border: rgba(170, 131, 255, 0.18);
+  --text: #f7f6fb;
+  --muted: #c8c4d8;
+  --purple: #a76bff;
+  --green: #60efbe;
+}
