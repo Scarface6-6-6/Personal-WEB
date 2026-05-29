@@ -1,22 +1,25 @@
 import styles from "../Styles/Galeria.module.css";
+import profileImage from "../assets/profile.jpeg";
+import instagramIcon from "../assets/instagram_line_black.png";
+import playstationIcon from "../assets/play_vintage.png";
+
+const images = [
+  { id: 1, title: "Foto de perfil", src: profileImage },
+  { id: 2, title: "Instagram", src: instagramIcon },
+  { id: 3, title: "PlayStation", src: playstationIcon }
+];
 
 export default function Galeria() {
-  const imagenes = [
-    { id: 1, titulo: "Imagen 1", src: "../assets/social.png" },
-    { id: 2, titulo: "Imagen 2", src: "../assets/social.png" },
-    { id: 3, titulo: "Imagen 3", src: "../assets/social.png" },
-  ];
-
   return (
     <div className="screen active">
-      <div className="eyebrow">GALERÍA</div>
+      <div className="eyebrow">GALERIA</div>
       <h2>Mis Fotos</h2>
-      <h3>Una colección de momentos especiales</h3>
+      <h3>Una coleccion de momentos especiales</h3>
 
       <div className={styles.galeriaGrid}>
-        {imagenes.map((imagen) => (
-          <div key={imagen.id} className={styles.galeriaItem}>
-            <img src={imagen.src} alt={imagen.titulo} />
+        {images.map((image) => (
+          <div key={image.id} className={styles.galeriaItem}>
+            <img src={image.src} alt={image.title} />
           </div>
         ))}
       </div>

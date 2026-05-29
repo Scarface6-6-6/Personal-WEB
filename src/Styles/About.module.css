@@ -1,28 +1,6 @@
-/* About page uses default styles from styles.css */
-/* Add page-specific styles here if needed */
-
-.aboutContainer h2 {
-  max-width: 760px;
-  margin-bottom: 0.70rem;
-  font-size: clamp(1.8rem, 4vw, 3rem);
-  line-height: 0.96;
-}
-
-.aboutContainer h3 {
-  max-width: 760px;
-  margin-bottom: 1.4rem;
-  font-size: clamp(0.95rem, 3vw, 1.2rem);
-  text-align: justify;
-  line-height: 1.7;
-}
 .h3 {
   max-width: 760px;
   margin-bottom: 1.4rem;
   font-size: clamp(0.95rem, 3vw, 1.2rem);
-  text-align: justify;
   line-height: 1.7;
-}
-.aboutContainer {
-  display: grid;
-  gap: 1rem;
 }

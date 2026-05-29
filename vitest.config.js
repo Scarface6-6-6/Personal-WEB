@@ -7,17 +7,16 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
     include: ['src/**/*.test.js', 'src/**/*.test.jsx'],
-    setupFiles: ['src/tests/setup.js'],
-    poolOptions: {
-      threads: {
-        singleThread: true
-      }
-    },
+    setupFiles: ['./src/utils/setup.js'],
+    fileParallelism: false,
     coverage: {
       provider: 'v8',
       reporter: ['text', 'json', 'html'],
       include: ['src/**/*.{js,jsx}'],
-      exclude: ['src/**/*.test.{js,jsx}', 'src/main.jsx'],
+      exclude: [
+        'src/**/*.test.{js,jsx}',
+        'src/main.jsx'
+      ],
       lines: 80,
       functions: 80,
       branches: 80,

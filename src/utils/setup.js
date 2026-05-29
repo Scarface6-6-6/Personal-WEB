@@ -1,6 +1,7 @@
 import { afterEach } from 'vitest';
 
-// Limpia el DOM después de cada test
+globalThis.IS_REACT_ACT_ENVIRONMENT = true;
+
 afterEach(() => {
   document.body.innerHTML = '';
 });

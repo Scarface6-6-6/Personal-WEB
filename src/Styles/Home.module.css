@@ -1,100 +1,117 @@
-.heroCopy {
+.homeScreen {
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.leftScrollPanel {
   display: grid;
   gap: 1rem;
+  max-height: calc(100vh - 10.5rem);
+  overflow-y: auto;
+  padding-right: 0.25rem;
 }
 
-.heroCopy h2 {
-  max-width: 760px;
-  margin-bottom: 0.70rem;
-  font-size: clamp(2rem, 5vw, 5.4rem);
-  line-height: 0.96;
-}
+.leftScrollPanel::-webkit-scrollbar { width: 8px; }
+.leftScrollPanel::-webkit-scrollbar-thumb { background: rgba(175, 132, 255, 0.35); border-radius: 999px; }
 
-.heroCopy h3 {
-  max-width: 760px;
-  margin-bottom: 1.4rem;
-  font-size: clamp(1rem, 4vw, 1.4rem);
-  text-align: justify;
-  line-height: 1.7;
-}
-
-.heroCopy p {
-  max-width: 640px;
-  font-size: 1.05rem;
-}
-
-.motionPanel {
-  position: relative;
-  min-height: 420px;
-  border-left: 1px solid var(--line);
-}
-
-.pulseCore {
-  position: absolute;
-  inset: 50% auto auto 50%;
-  width: 170px;
-  aspect-ratio: 1;
-  translate: -50% -50%;
-  border: 1px solid var(--accent-border);
-  border-radius: 999px;
-  background:
-    radial-gradient(circle, var(--accent-soft), transparent 58%),
-    rgba(244, 240, 232, 0.03);
-  animation: breathe 3.5s ease-in-out infinite;
-}
-
-.floatingCard {
-  position: absolute;
-  min-width: 96px;
+.homeBox {
   border: 1px solid var(--line);
-  border-radius: 8px;
-  background: var(--panel-strong);
-  color: var(--text);
-  padding: 0.8rem 1rem;
-  text-align: center;
-  text-transform: uppercase;
-  font-size: 0.74rem;
+  border-radius: 16px;
+  background: rgba(7, 10, 23, 0.78);
+  padding: 1.35rem;
+}
+
+.homeBox h4 {
+  margin: 0.25rem 0 0.7rem;
+  font-size: clamp(2rem, 2.1vw, 3rem);
+}
+
+.profileBox {
+  display: grid;
+  grid-template-columns: 56% 44%;
+  gap: 1rem;
+  min-height: 430px;
+}
+
+.profileCover {
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.boxCopy {
+  align-self: center;
+  max-width: 420px;
+}
+
+.boxCopy p {
+  font-size: 1.15rem;
+}
+
+.readmeBox {
+  position: relative;
+  min-height: 220px;
+  padding-right: 14rem;
+}
+
+.readmeBox p {
+  font-size: 1.1rem;
+  max-width: 780px;
+}
+
+.readmeBox::after {
+  content: "";
+  position: absolute;
+  right: 1.6rem;
+  bottom: 1.2rem;
+  width: 190px;
+  height: 130px;
+  background-image: radial-gradient(rgba(175, 132, 255, 0.45) 1.2px, transparent 1.2px);
+  background-size: 12px 12px;
+}
+
+.codeBadge {
+  position: absolute;
+  right: 2.1rem;
+  bottom: 2rem;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  border-radius: 10px;
+  padding: 0.4rem 0.62rem;
   font-weight: 800;
-  letter-spacing: 0.12em;
-  animation: float 5s ease-in-out infinite;
+  background: rgba(8, 11, 25, 0.76);
 }
 
-.cardOne {
-  left: 14%;
-  top: 18%;
+.galleryBox h4,
+.songBox h4 { font-size: clamp(1.8rem, 2vw, 2.45rem); }
+
+.carouselImage {
+  width: 100%;
+  height: 320px;
+  border-radius: 12px;
+  object-fit: cover;
+  border: 1px solid var(--line);
 }
 
-.cardTwo {
-  right: 8%;
-  top: 42%;
-  color: var(--accent-two);
-  animation-delay: -1.4s;
+.songBox {
+  display: grid;
+  gap: 0.7rem;
+  background: linear-gradient(130deg, rgba(35, 37, 60, 0.76), rgba(11, 17, 34, 0.86));
 }
 
-.cardThree {
-  left: 28%;
-  bottom: 16%;
-  color: var(--accent-three);
-  animation-delay: -2.6s;
+.songButton {
+  width: fit-content;
+  border: 1px solid rgba(98, 239, 191, 0.72);
+  color: var(--text);
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 0.55rem 0.95rem;
 }
 
-@keyframes breathe {
-  50% {
-    transform: scale(1.12);
-    box-shadow: 0 0 70px var(--glow-primary);
-  }
-}
-
-@keyframes float {
-  50% {
-    transform: translateY(-18px);
-  }
-}
-
-@media (max-width: 860px) {
-  .motionPanel {
-    min-height: 260px;
-    border-left: 0;
-    border-top: 1px solid var(--line);
-  }
+@media (max-width: 1100px) {
+  .profileBox { grid-template-columns: 1fr; }
+  .readmeBox { padding-right: 1.35rem; }
+  .readmeBox::after,
+  .codeBadge { display: none; }
+  .leftScrollPanel { max-height: none; }
 }

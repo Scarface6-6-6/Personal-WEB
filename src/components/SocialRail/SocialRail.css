@@ -1,0 +1,36 @@
+﻿.social-rail {
+  position: sticky;
+  top: 110px;
+  height: calc(100vh - 140px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.social-line {
+  width: 2px;
+  height: 62%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(167, 107, 255, 0.9),
+    transparent
+  );
+}
+
+.social-icons {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  font-size: 48px;
+  line-height: 1;
+  color: #f3f3fa;
+}
+
+@media (max-width: 1200px) {
+  .social-rail {
+    position: static;
+    height: auto;
+  }
+}

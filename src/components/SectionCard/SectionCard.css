@@ -1,0 +1,39 @@
+﻿.card {
+  background: var(--panel);
+  border: 1px solid rgba(167, 107, 255, 0.28);
+  border-radius: 18px;
+  backdrop-filter: blur(20px);
+  box-shadow:
+    0 20px 48px rgba(0, 0, 0, 0.3),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    0 0 0 1px rgba(167, 107, 255, 0.12);
+}
+
+.section-card {
+  padding: 36px;
+  min-height: 900px;
+}
+
+.label {
+  color: var(--purple);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.section-card h2 {
+  font-size: clamp(2rem, 3.4vw, 3.4rem);
+  margin: 14px 0;
+}
+
+.section-body {
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 1.02rem;
+}
+
+@media (max-width: 1200px) {
+  .section-card {
+    min-height: 500px;
+  }
+}
