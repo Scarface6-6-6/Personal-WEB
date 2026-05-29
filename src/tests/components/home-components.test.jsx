@@ -1,8 +1,9 @@
 ﻿import { describe, expect, it, vi } from "vitest";
 import { act } from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, MemoryRouter, Route, Routes } from "react-router-dom";
 import Home from "../../pages/Home";
+import AppLayout from "../../components/AppLayout/AppLayout";
 import SectionCard from "../../components/SectionCard/SectionCard";
 import RightMenu from "../../components/RightMenu/RightMenu";
 import SocialRail from "../../components/SocialRail/SocialRail";
@@ -39,7 +40,7 @@ describe("Home and component rendering", () => {
 
   it("updates random gallery image over time and cleans interval", () => {
     vi.useFakeTimers();
-    const clearSpy = vi.spyOn(window, "clearInterval");
+    const clearSpy = vi.spyOn(globalThis, "clearInterval");
 
     const { container, root } = render(<Home />);
     const gallery = container.querySelector(".home__gallery-preview");
@@ -73,6 +74,21 @@ describe("Home and component rendering", () => {
     expect(container.textContent).toContain("☰");
   });
 
+  it("updates localStorage when switching language in TopBar", () => {
+    const { container } = render(
+      <BrowserRouter>
+        <TopBar menuOpen={false} onMenuEnter={() => {}} onMenuLeave={() => {}} onMenuToggle={() => {}} />
+      </BrowserRouter>
+    );
+
+    const buttons = container.querySelectorAll(".topbar__lang button");
+    act(() => {
+      buttons[1].dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+
+    expect(globalThis.localStorage.getItem("language")).toBe("en");
+  });
+
   it("renders SocialRail links", () => {
     const { container } = render(<SocialRail />);
 
@@ -80,7 +96,7 @@ describe("Home and component rendering", () => {
   });
 
   it("renders RightMenu without close button", () => {
-    window.history.pushState({}, "", "/now");
+    globalThis.history.pushState({}, "", "/now");
 
     const { container } = render(
       <BrowserRouter>
@@ -90,7 +106,66 @@ describe("Home and component rendering", () => {
 
     expect(container.textContent).toContain("About Me");
     expect(container.textContent).not.toContain("×");
-    expect(container.querySelector(".menu-item.active")?.textContent).toContain("Ahora");
+    expect(container.querySelector(".menu-item.active")?.textContent).toContain("Now");
+  });
+
+  it("keeps side rails on home route and hides social rail on secondary route", () => {
+    const homeRender = render(
+      <MemoryRouter initialEntries={["/"]}>
+        <Routes>
+          <Route element={<AppLayout />}>
+            <Route path="/" element={<div>HOME SLOT</div>} />
+          </Route>
+        </Routes>
+      </MemoryRouter>
+    );
+
+    expect(homeRender.container.querySelector(".social-rail")).toBeTruthy();
+    expect(homeRender.container.querySelector(".right-menu--open")).toBeTruthy();
+
+    const secondaryRender = render(
+      <MemoryRouter initialEntries={["/about"]}>
+        <Routes>
+          <Route element={<AppLayout />}>
+            <Route path="/about" element={<div>ABOUT SLOT</div>} />
+          </Route>
+        </Routes>
+      </MemoryRouter>
+    );
+
+    expect(secondaryRender.container.querySelector(".social-rail")).toBeFalsy();
+    expect(secondaryRender.container.querySelector(".right-menu--open")).toBeFalsy();
+  });
+
+  it("opens and closes menu in secondary routes using topbar events", () => {
+    vi.useFakeTimers();
+
+    const { container } = render(
+      <MemoryRouter initialEntries={["/about"]}>
+        <Routes>
+          <Route element={<AppLayout />}>
+            <Route path="/about" element={<div>ABOUT SLOT</div>} />
+          </Route>
+        </Routes>
+      </MemoryRouter>
+    );
+
+    const menuButton = container.querySelector(".topbar__menu");
+    const rightMenu = container.querySelector(".right-menu");
+
+    act(() => {
+      menuButton?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+
+    expect(rightMenu?.className).toContain("right-menu--open");
+
+    act(() => {
+      menuButton?.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+      vi.advanceTimersByTime(10);
+    });
+
+    expect(rightMenu?.className).not.toContain("right-menu--open");
+    vi.useRealTimers();
   });
 
   it("renders ProfileHero image", () => {
@@ -119,4 +194,3 @@ describe("Home and component rendering", () => {
     expect(withoutClass.container.querySelector(".section-card")?.textContent).toContain("Otro titulo");
   });
 });
-
