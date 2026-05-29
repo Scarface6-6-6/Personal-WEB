@@ -1,5 +1,12 @@
 ﻿.home {
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.home > * {
+  width: 100%;
 }
 
 .home__layout {
@@ -82,3 +89,4 @@
     display: none;
   }
 }
+

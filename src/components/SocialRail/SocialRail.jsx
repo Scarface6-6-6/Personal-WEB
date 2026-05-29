@@ -1,4 +1,5 @@
-﻿import "./SocialRail.css";
+﻿import { SOCIAL_ITEMS } from "../../utils/constants";
+import "./SocialRail.css";
 
 export default function SocialRail() {
   return (
@@ -6,11 +7,20 @@ export default function SocialRail() {
       <div className="social-line" />
 
       <div className="social-icons">
-        <span>◎</span>
-        <span>♬</span>
-        <span>⌘</span>
-        <span>in</span>
+        {SOCIAL_ITEMS.map((item) => (
+          <a
+            key={item.key}
+            href={item.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={item.label}
+            className="social-link"
+          >
+            <img src={item.icon} alt={item.label} />
+          </a>
+        ))}
       </div>
     </aside>
   );
 }
+

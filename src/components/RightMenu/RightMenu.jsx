@@ -1,28 +1,39 @@
-﻿import "./RightMenu.css";
+﻿import { NavLink, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { MENU_ITEMS } from "../../utils/constants";
+import "./RightMenu.css";
 
-export default function RightMenu() {
-  const items = [
-    { label: "About Me", icon: "◌" },
-    { label: "Gustos", icon: "♡" },
-    { label: "Galeria", icon: "▣" },
-    { label: "Ahora", icon: "⌘" },
-    { label: "Links", icon: "⌁" }
-  ];
+export default function RightMenu({ open, onHoverStart, onHoverEnd }) {
+  const { t } = useTranslation();
+  const location = useLocation();
+
+  const isActive = (aliases) => aliases.includes(location.pathname);
 
   return (
-    <aside className="right-menu card">
-      <div className="menu-close">×</div>
-
+    <aside
+      className={`right-menu card ${open ? "right-menu--open" : ""}`}
+      onMouseEnter={onHoverStart}
+      onMouseLeave={onHoverEnd}
+    >
       <div className="menu-list">
-        {items.map((item) => (
-          <div className={`menu-item ${item.label === "Ahora" ? "active" : ""}`} key={item.label}>
+        {MENU_ITEMS.map((item) => (
+          <NavLink
+            key={item.key}
+            to={item.path}
+            className={`menu-item ${isActive(item.aliases) ? "active" : ""}`}
+          >
             <span className="menu-item-left">
-              <span className="menu-item-icon">{item.icon}</span>
-              <span>{item.label}</span>
+              <span className="menu-item-icon">•</span>
+              <span>{t(`menu.${item.key}`)}</span>
             </span>
             <span className="menu-item-dot">●</span>
-          </div>
+          </NavLink>
         ))}
+      </div>
+
+      <div className="menu-footer">
+        <span className="menu-footer__dot" aria-hidden="true" />
+        <span>Editando poco a poco</span>
       </div>
     </aside>
   );

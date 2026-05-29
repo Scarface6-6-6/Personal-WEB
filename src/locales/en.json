@@ -1,0 +1,58 @@
+﻿{
+  "brand": "Scarface_666",
+  "language": {
+    "es": "ES",
+    "en": "EN"
+  },
+  "menu": {
+    "about": "About Me",
+    "likes": "Likes",
+    "gallery": "Gallery",
+    "now": "Now",
+    "links": "Links"
+  },
+  "home": {
+    "profileLabel": "PROFILE",
+    "galleryLabel": "GALLERY",
+    "readmeLabel": "README",
+    "musicLabel": "MUSIC",
+    "profileTitle": "Scarface_666",
+    "galleryTitle": "Photo roll",
+    "readmeTitle": "Hi, I am Andres Pantoja",
+    "musicTitle": "Song of the Week",
+    "description1": "A personal space to share who I am, what I like, and what I am discovering.",
+    "description2": "Software engineer. Here I share photos, music tastes, links, and anything that tells a bit more about me.",
+    "songLink": "Listen to song of the week"
+  },
+  "about": {
+    "eyebrow": "README",
+    "title": "About me",
+    "text1": "I am a person passionate about technology and web development. I love learning new things and sharing knowledge with others.",
+    "text2": "With full-stack development experience, I focus on building innovative and efficient solutions. I am always improving my skills and exploring new technologies."
+  },
+  "likes": {
+    "eyebrow": "MY LIKES",
+    "title": "Music and Food",
+    "subtitle": "Things that make me happy",
+    "music": "Favorite Music",
+    "food": "Favorite Food",
+    "musicItem": "Music",
+    "foodItem": "Food"
+  },
+  "gallery": {
+    "eyebrow": "GALLERY",
+    "title": "My Photos",
+    "subtitle": "A collection of special moments"
+  },
+  "links": {
+    "eyebrow": "LINKS",
+    "title": "My Networks",
+    "subtitle": "Follow me on social media"
+  },
+  "now": {
+    "eyebrow": "NOW",
+    "title": "What I am doing",
+    "subtitle": "Focused on improving this portfolio, learning new technologies, and building projects with better UX."
+  }
+}
+

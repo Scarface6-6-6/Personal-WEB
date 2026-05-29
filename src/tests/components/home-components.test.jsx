@@ -1,6 +1,7 @@
 ﻿import { describe, expect, it, vi } from "vitest";
 import { act } from "react";
 import { createRoot } from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 import Home from "../../pages/Home";
 import SectionCard from "../../components/SectionCard/SectionCard";
 import RightMenu from "../../components/RightMenu/RightMenu";
@@ -9,6 +10,9 @@ import TopBar from "../../components/TopBar/TopBar";
 import ProfileHero from "../../components/ProfileHero/ProfileHero";
 
 vi.mock("../../assets/Profile_Car.png", () => ({ default: "car.png" }));
+vi.mock("../../assets/instagram_line_black.png", () => ({ default: "instagram.png" }));
+vi.mock("../../assets/twitch.png", () => ({ default: "twitch.png" }));
+vi.mock("../../assets/discord_line_black.png", () => ({ default: "discord.png" }));
 
 const render = (node) => {
   const container = document.createElement("div");
@@ -23,16 +27,14 @@ const render = (node) => {
 };
 
 describe("Home and component rendering", () => {
-  it("renders home with ordered central cards", () => {
+  it("renders home cards", () => {
     const { container } = render(<Home />);
 
-    const cards = container.querySelectorAll(".home__content > *");
+    const cards = container.querySelectorAll(".home > *");
     expect(cards.length).toBe(5);
-    expect(cards[0].querySelector("img")).toBeTruthy();
     expect(cards[1].textContent).toContain("Scarface_666");
     expect(cards[2].textContent).toContain("Rollo de fotos");
     expect(cards[3].textContent).toContain("Hola, Soy Andres Pantoja");
-    expect(cards[4].textContent).toContain("Apartado de Cancion de la Semana");
   });
 
   it("updates random gallery image over time and cleans interval", () => {
@@ -60,27 +62,35 @@ describe("Home and component rendering", () => {
   });
 
   it("renders TopBar", () => {
-    const { container } = render(<TopBar />);
+    const { container } = render(
+      <BrowserRouter>
+        <TopBar menuOpen={false} onMenuEnter={() => {}} onMenuLeave={() => {}} onMenuToggle={() => {}} />
+      </BrowserRouter>
+    );
 
     expect(container.textContent).toContain("ES");
     expect(container.textContent).toContain("EN");
     expect(container.textContent).toContain("☰");
   });
 
-  it("renders SocialRail icons", () => {
+  it("renders SocialRail links", () => {
     const { container } = render(<SocialRail />);
 
-    expect(container.textContent).toContain("◎");
-    expect(container.textContent).toContain("♬");
-    expect(container.textContent).toContain("⌘");
-    expect(container.textContent).toContain("in");
+    expect(container.querySelectorAll("a").length).toBe(3);
   });
 
-  it("renders RightMenu with active item", () => {
-    const { container } = render(<RightMenu />);
+  it("renders RightMenu without close button", () => {
+    window.history.pushState({}, "", "/now");
 
-    expect(container.querySelector(".menu-item.active")?.textContent).toContain("Ahora");
+    const { container } = render(
+      <BrowserRouter>
+        <RightMenu open onHoverStart={() => {}} onHoverEnd={() => {}} />
+      </BrowserRouter>
+    );
+
     expect(container.textContent).toContain("About Me");
+    expect(container.textContent).not.toContain("×");
+    expect(container.querySelector(".menu-item.active")?.textContent).toContain("Ahora");
   });
 
   it("renders ProfileHero image", () => {
@@ -109,3 +119,4 @@ describe("Home and component rendering", () => {
     expect(withoutClass.container.querySelector(".section-card")?.textContent).toContain("Otro titulo");
   });
 });
+

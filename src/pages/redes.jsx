@@ -1,12 +1,15 @@
+﻿import { useTranslation } from "react-i18next";
 import { SOCIAL_ITEMS } from "../utils/constants";
 import styles from "../Styles/Redes.module.css";
 
 export default function Redes() {
+  const { t } = useTranslation();
+
   return (
     <div className="screen active">
-      <div className="eyebrow">LINKS</div>
-      <h2>Mis Redes</h2>
-      <h3>Sigueme en mis redes sociales</h3>
+      <div className="eyebrow">{t("links.eyebrow")}</div>
+      <h2>{t("links.title")}</h2>
+      <h3>{t("links.subtitle")}</h3>
 
       <div className={styles.redesGrid}>
         {SOCIAL_ITEMS.map((red) => (
@@ -17,7 +20,7 @@ export default function Redes() {
             rel="noopener noreferrer"
             className={styles.redesCard}
           >
-            <img src={red.icono} alt={red.label} />
+            <img src={red.icon} alt={red.label} />
             <span>{red.label}</span>
           </a>
         ))}
@@ -25,3 +28,4 @@ export default function Redes() {
     </div>
   );
 }
+
