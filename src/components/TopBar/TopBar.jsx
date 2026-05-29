@@ -1,4 +1,5 @@
-﻿import { Link } from "react-router-dom";
+﻿import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./TopBar.css";
 
@@ -6,8 +7,8 @@ export default function TopBar({ menuOpen, onMenuEnter, onMenuLeave, onMenuToggl
   const { i18n, t } = useTranslation();
 
   const setLanguage = (language) => {
-    void i18n.changeLanguage(language);
-    window.localStorage.setItem("language", language);
+    i18n.changeLanguage(language).catch(() => {});
+    globalThis.localStorage.setItem("language", language);
   };
 
   return (
@@ -46,3 +47,10 @@ export default function TopBar({ menuOpen, onMenuEnter, onMenuLeave, onMenuToggl
     </header>
   );
 }
+
+TopBar.propTypes = {
+  menuOpen: PropTypes.bool.isRequired,
+  onMenuEnter: PropTypes.func.isRequired,
+  onMenuLeave: PropTypes.func.isRequired,
+  onMenuToggle: PropTypes.func.isRequired
+};

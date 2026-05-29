@@ -1,4 +1,5 @@
-﻿import { NavLink, useLocation } from "react-router-dom";
+﻿import PropTypes from "prop-types";
+import { NavLink, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { MENU_ITEMS } from "../../utils/constants";
 import "./RightMenu.css";
@@ -38,3 +39,9 @@ export default function RightMenu({ open, onHoverStart, onHoverEnd }) {
     </aside>
   );
 }
+
+RightMenu.propTypes = {
+  open: PropTypes.bool.isRequired,
+  onHoverStart: PropTypes.func.isRequired,
+  onHoverEnd: PropTypes.func.isRequired
+};

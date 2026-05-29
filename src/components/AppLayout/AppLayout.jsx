@@ -14,7 +14,7 @@ export default function AppLayout() {
 
   const clearCloseTimeout = useCallback(() => {
     if (closeTimeoutRef.current) {
-      window.clearTimeout(closeTimeoutRef.current);
+      globalThis.clearTimeout(closeTimeoutRef.current);
       closeTimeoutRef.current = null;
     }
   }, []);
@@ -26,7 +26,7 @@ export default function AppLayout() {
 
   const closeMenu = useCallback(() => {
     clearCloseTimeout();
-    closeTimeoutRef.current = window.setTimeout(() => {
+    closeTimeoutRef.current = globalThis.setTimeout(() => {
       setMenuOpen(false);
     }, 160);
   }, [clearCloseTimeout]);
@@ -77,4 +77,3 @@ export default function AppLayout() {
     </div>
   );
 }
-
