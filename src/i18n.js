@@ -5,19 +5,16 @@ import en from "./locales/en.json";
 
 const savedLanguage = globalThis.localStorage.getItem("language");
 
-i18n
-  .use(initReactI18next)
-  .init({
-    resources: {
-      es: { translation: es },
-      en: { translation: en }
-    },
-    lng: savedLanguage || "es",
-    fallbackLng: "es",
-    interpolation: {
-      escapeValue: false
-    }
-  })
-  .catch(() => {});
+await i18n.use(initReactI18next).init({
+  resources: {
+    es: { translation: es },
+    en: { translation: en }
+  },
+  lng: savedLanguage || "es",
+  fallbackLng: "es",
+  interpolation: {
+    escapeValue: false
+  }
+});
 
 export default i18n;
