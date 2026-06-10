@@ -68,5 +68,13 @@ describe("App routes", () => {
 
     expect(container.textContent).toContain("Que estoy haciendo");
   });
+
+  it("renders Renata invite route without the main shell copy", () => {
+    const container = renderAt("/renata");
+
+    expect(container.textContent).toContain("Hola, Ollin.");
+    expect(container.textContent).toContain("Iniciar encuesta");
+    expect(container.textContent).not.toContain("Rollo de fotos");
+  });
 });
 
