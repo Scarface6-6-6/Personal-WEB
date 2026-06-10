@@ -1,56 +1,88 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import PropTypes from "prop-types";
+import {
+  invitationOptions,
+  inviteDetails,
+  movieOptions,
+  movieResponses,
+  permissionResponses,
+  progressByStep,
+  rescheduleOptions,
+  stepLabels,
+  terminalLines,
+  whatsappMessages
+} from "../data/invitationContent";
 import "./RenataInvite.css";
 
-const inviteDetails = {
-  girlName: "Ollin",
-  movieName: "Scary Movie: Terroríficamente Incorrecta",
-  mainDate: "este fin",
-  mainTime: "en la tarde/noche",
-  cinema: "un cine que nos quede cómodo",
-  whatsappMessage: "Acepto la invitación sospechosamente elaborada 😉"
-};
+function createWhatsappUrl(message) {
+  return `https://wa.me/?text=${encodeURIComponent(message)}`;
+}
 
-const progressByStep = {
-  welcome: 8,
-  permission: 22,
-  movie: 44,
-  reveal: 66,
-  invitation: 84,
-  accepted: 100,
-  reschedule: 100,
-  thinking: 100
-};
-
-const movieReplies = {
-  "mucho": "Excelente. El sistema acaba de encontrar una coincidencia sospechosamente conveniente.",
-  "me llama": "Anotado. Interés suficiente para activar el modo palomitas.",
-  "convenceme": "Acepto el reto. Prometo una defensa breve y sin spoilers.",
-  "no conozco": "Perfecto. También se aceptan planes con investigación de campo."
-};
-
-const stepLabels = {
-  welcome: "Inicio",
-  permission: "Permiso",
-  movie: "Película",
-  reveal: "Revelación",
-  invitation: "Invitación",
-  accepted: "Aceptada",
-  reschedule: "Plan B",
-  thinking: "Pendiente"
-};
-
-function TerminalBlock({ children }) {
+function TerminalAlert({ children }) {
   return <div className="renata-terminal">{children}</div>;
 }
 
-TerminalBlock.propTypes = {
+TerminalAlert.propTypes = {
   children: PropTypes.node.isRequired
 };
 
-function OptionButton({ children, onClick, variant = "default" }) {
+function TerminalBlock({ lines }) {
   return (
-    <button className={`renata-option renata-option--${variant}`} type="button" onClick={onClick}>
+    <div className="renata-code-block">
+      {lines.map((line) => (
+        <span key={line}>{line}</span>
+      ))}
+    </div>
+  );
+}
+
+TerminalBlock.propTypes = {
+  lines: PropTypes.arrayOf(PropTypes.string).isRequired
+};
+
+function DeveloperNote() {
+  return (
+    <aside className="renata-note">
+      <p className="renata-eyebrow">Nota del desarrollador:</p>
+      <p>La alternativa era preguntarte por mensaje.</p>
+      <p>
+        Pero claramente tomé la{" "}
+        <span title="Desarrollador detectado.">ruta más complicada</span>.
+      </p>
+    </aside>
+  );
+}
+
+function StatsCard() {
+  return (
+    <div className="renata-stats">
+      <p className="renata-eyebrow">Estadísticas innecesarias:</p>
+      <dl>
+        <div>
+          <dt>Tiempo invertido construyendo esta página</dt>
+          <dd>7 horas</dd>
+        </div>
+        <div>
+          <dt>Tiempo que habría tomado escribir "¿Vamos al cine?"</dt>
+          <dd>18 segundos</dd>
+        </div>
+        <div>
+          <dt>Decisión tomada</dt>
+          <dd>La ruta complicada</dd>
+        </div>
+      </dl>
+    </div>
+  );
+}
+
+function OptionButton({ children, onClick, variant = "default", disabled = false }) {
+  return (
+    <button
+      className={`renata-option renata-option--${variant}`}
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+    >
       {children}
     </button>
   );
@@ -58,6 +90,7 @@ function OptionButton({ children, onClick, variant = "default" }) {
 
 OptionButton.propTypes = {
   children: PropTypes.node.isRequired,
+  disabled: PropTypes.bool,
   onClick: PropTypes.func.isRequired,
   variant: PropTypes.string
 };
@@ -79,38 +112,60 @@ export default function RenataInvite() {
   const [answers, setAnswers] = useState({
     permission: "",
     movieInterest: "",
-    finalResponse: "",
+    invitation: "",
     preferredTime: ""
   });
-  const [systemReply, setSystemReply] = useState("");
+  const [inviteLoad, setInviteLoad] = useState(0);
+  const [logoClicks, setLogoClicks] = useState(0);
+
+  const selectedMovieResponse = movieResponses[answers.movieInterest || "me_llama"];
 
   const whatsappUrl = useMemo(() => {
-    return `https://wa.me/?text=${encodeURIComponent(inviteDetails.whatsappMessage)}`;
-  }, []);
+    const message = whatsappMessages[answers.invitation] || whatsappMessages.accepted;
+    return createWhatsappUrl(message);
+  }, [answers.invitation]);
+
+  useEffect(() => {
+    if (step !== "reveal") {
+      setInviteLoad(0);
+      return undefined;
+    }
+
+    const timer = window.setInterval(() => {
+      setInviteLoad((current) => {
+        if (current >= 96) {
+          window.clearInterval(timer);
+          return 100;
+        }
+
+        return current + 4;
+      });
+    }, 70);
+
+    return () => window.clearInterval(timer);
+  }, [step]);
 
   const choosePermission = (value) => {
     setAnswers((current) => ({ ...current, permission: value }));
-    setSystemReply(
-      value === "si"
-        ? "Curiosidad detectada... Continuando."
-        : "Respuesta registrada. El sistema promete ser breve."
-    );
-    setStep("movie");
+    setStep("movieInterest");
   };
 
   const chooseMovie = (value) => {
     setAnswers((current) => ({ ...current, movieInterest: value }));
-    setSystemReply(movieReplies[value]);
     setStep("reveal");
   };
 
   const chooseFinal = (value) => {
-    setAnswers((current) => ({ ...current, finalResponse: value }));
+    setAnswers((current) => ({ ...current, invitation: value }));
     setStep(value);
   };
 
   const chooseBackup = (value) => {
     setAnswers((current) => ({ ...current, preferredTime: value }));
+  };
+
+  const countLogoClick = () => {
+    setLogoClicks((current) => Math.min(current + 1, 5));
   };
 
   return (
@@ -126,8 +181,12 @@ export default function RenataInvite() {
       <section className="renata-shell" aria-live="polite">
         <header className="renata-header">
           <div>
-            <p className="renata-logo">Scarface_666</p>
-            <p className="renata-kicker">date-invitation-flow</p>
+            <button className="renata-logo" type="button" onClick={countLogoClick}>
+              Scarface_666
+            </button>
+            {logoClicks >= 5 && (
+              <p className="renata-achievement">Achievement unlocked: Curiosity Level: High</p>
+            )}
           </div>
           <span className="renata-step">{stepLabels[step]}</span>
         </header>
@@ -166,81 +225,109 @@ export default function RenataInvite() {
           </div>
         )}
 
-        {step === "movie" && (
+        {step === "movieInterest" && (
           <div className="renata-card">
-            <TerminalBlock>{systemReply}</TerminalBlock>
-            <p className="renata-eyebrow">Diagnóstico rápido</p>
-            <h2>¿Qué tan interesada estás en ver {inviteDetails.movieName}?</h2>
+            <TerminalAlert>{permissionResponses[answers.permission]}</TerminalAlert>
+            <p className="renata-eyebrow">Pregunta importante</p>
+            <h2>
+              ¿Qué tan interesada estás en ver
+              <span className="renata-title-break">{inviteDetails.movieName}?</span>
+            </h2>
             <div className="renata-options">
-              <OptionButton onClick={() => chooseMovie("mucho")}>Mucho</OptionButton>
-              <OptionButton onClick={() => chooseMovie("me llama")}>
-                Me llama la atención
-              </OptionButton>
-              <OptionButton onClick={() => chooseMovie("convenceme")}>
-                No sé, convénceme
-              </OptionButton>
-              <OptionButton onClick={() => chooseMovie("no conozco")}>
-                No la conozco, pero escucho argumentos
-              </OptionButton>
+              {movieOptions.map((option) => (
+                <OptionButton key={option.value} onClick={() => chooseMovie(option.value)}>
+                  {option.label}
+                </OptionButton>
+              ))}
             </div>
           </div>
         )}
 
         {step === "reveal" && (
           <div className="renata-card renata-card--reveal">
-            <TerminalBlock>
-              <p>{systemReply}</p>
-              <p>Procesando respuestas...</p>
-              <p>Loading invitation... [████████░░] 87%</p>
-            </TerminalBlock>
-            <h2>Conclusión:</h2>
-            <p>
-              Esta encuesta era una excusa cuidadosamente mal disimulada para invitarte
-              al cine.
-            </p>
-            <ul className="renata-checks">
-              <li>✓ Curiosidad detectada</li>
-              <li>✓ Película seleccionada</li>
-              <li>✓ Plan tranquilo disponible</li>
-              <li>✓ Invitación desbloqueada</li>
-            </ul>
-            <OptionButton variant="primary" onClick={() => setStep("invitation")}>
-              Ver invitación formal
+            <TerminalAlert>
+              {selectedMovieResponse.alert.split("\n").map((line, index) => (
+                <p key={`${line}-${index}`}>{line || "\u00A0"}</p>
+              ))}
+            </TerminalAlert>
+            <p className="renata-eyebrow">Revelación</p>
+            <h2>{selectedMovieResponse.revealTitle}</h2>
+            <pre className="renata-reveal-text">{selectedMovieResponse.revealText}</pre>
+            <TerminalBlock lines={terminalLines} />
+            <OptionButton
+              variant="primary"
+              disabled={inviteLoad < 100}
+              onClick={() => setStep("invitation")}
+            >
+              <span className="renata-loading-button">
+                <span>Ver propuesta formal</span>
+                <span className="renata-loading-button__status">
+                  Loading invitation...
+                  <span className="renata-loading-button__bar" aria-hidden="true">
+                    <span style={{ width: `${inviteLoad}%` }} />
+                  </span>
+                  {inviteLoad}%
+                </span>
+              </span>
             </OptionButton>
           </div>
         )}
 
         {step === "invitation" && (
           <div className="renata-card">
-            <p className="renata-eyebrow">Propuesta formal</p>
-            <h2>Me gustaría invitarte al cine.</h2>
+            <p className="renata-eyebrow">Mi propuesta es la siguiente:</p>
+            <h2>Vamos al cine.</h2>
             <p>
-              A ver {inviteDetails.movieName} {inviteDetails.mainDate}, {inviteDetails.mainTime},
+              A ver {inviteDetails.movieName}
+              <br />
+              {inviteDetails.mainDate}, {inviteDetails.mainTime},
+              <br />
               en {inviteDetails.cinema}.
             </p>
-            <p>La idea: película, palomitas y una buena plática antes o después.</p>
+            <div className="renata-plan">
+              <p>Plan tentativo:</p>
+              <ul>
+                <li>🌙 Función nocturna</li>
+                <li>🎬 Scary Movie</li>
+                <li>🍿 Palomitas obligatorias</li>
+                <li>🍬 Dulces opcionales</li>
+                <li>💨 Un porrito antes si la junta organizadora lo aprueba</li>
+                <li>😂 Risas muy probables</li>
+              </ul>
+            </div>
+            <DeveloperNote />
             <div className="renata-options">
-              <OptionButton variant="primary" onClick={() => chooseFinal("accepted")}>
-                Sí, jalo
-              </OptionButton>
-              <OptionButton onClick={() => chooseFinal("reschedule")}>
-                Me interesa, pero ese día no puedo
-              </OptionButton>
-              <OptionButton onClick={() => chooseFinal("thinking")}>
-                Déjame pensarlo
-              </OptionButton>
+              {invitationOptions.map((option) => (
+                <OptionButton
+                  key={option.value}
+                  variant={option.value === "accepted" ? "primary" : "default"}
+                  onClick={() => chooseFinal(option.value)}
+                >
+                  {option.label}
+                </OptionButton>
+              ))}
             </div>
           </div>
         )}
 
         {step === "accepted" && (
           <div className="renata-card">
-            <p className="renata-eyebrow">status: accepted</p>
-            <h2>Invitación aceptada.</h2>
-            <TerminalBlock>
-              El sistema recomienda: confirmar horario, elegir cine y fingir que esto fue
-              improvisado.
-            </TerminalBlock>
+            <p className="renata-eyebrow">INVITACIÓN ACEPTADA</p>
+            <h2>Excelente.</h2>
+            <p>
+              Ahora toca coordinar los pequeños detalles logísticos que normalmente se
+              resuelven sin necesidad de una página web.
+            </p>
+            <StatsCard />
+            <TerminalBlock
+              lines={[
+                "$ systemctl status invitation.service",
+                "Status: Waiting for response",
+                "Hope: High",
+                "Nervousness: Moderate",
+                "Bugs: None yet"
+              ]}
+            />
             <a className="renata-whatsapp" href={whatsappUrl} target="_blank" rel="noreferrer">
               Abrir WhatsApp
             </a>
@@ -250,35 +337,43 @@ export default function RenataInvite() {
         {step === "reschedule" && (
           <div className="renata-card">
             <p className="renata-eyebrow">status: plan_b</p>
-            <h2>No pasa nada. El sistema tiene plan B.</h2>
+            <h2>No pasa nada.</h2>
+            <p>La invitación sigue vigente. El sistema tiene plan B.</p>
             <div className="renata-options">
-              {["Entre semana", "Fin de semana", "La próxima semana", "Yo te digo cuándo"].map(
-                (option) => (
-                  <OptionButton
-                    key={option}
-                    variant={answers.preferredTime === option ? "selected" : "default"}
-                    onClick={() => chooseBackup(option)}
-                  >
-                    {option}
-                  </OptionButton>
-                )
-              )}
+              {rescheduleOptions.map((option) => (
+                <OptionButton
+                  key={option}
+                  variant={answers.preferredTime === option ? "selected" : "default"}
+                  onClick={() => chooseBackup(option)}
+                >
+                  {option}
+                </OptionButton>
+              ))}
             </div>
             {answers.preferredTime && (
-              <TerminalBlock>
-                Perfecto. Entonces queda pendiente coordinarlo sin convertir esto en junta de Scrum.
-              </TerminalBlock>
+              <>
+                <TerminalAlert>
+                  <p>Perfecto.</p>
+                  <p>Queda pendiente coordinarlo sin convertir esto en una junta de Scrum.</p>
+                </TerminalAlert>
+                <a className="renata-whatsapp" href={whatsappUrl} target="_blank" rel="noreferrer">
+                  Coordinar por WhatsApp
+                </a>
+              </>
             )}
           </div>
         )}
 
         {step === "thinking" && (
           <div className="renata-card">
-            <p className="renata-eyebrow">status: pending_review</p>
-            <h2>Respuesta válida.</h2>
-            <p>La invitación queda en estado: pending_review.</p>
+            <p className="renata-eyebrow">Respuesta registrada: pending_review</p>
+            <h2>Válido.</h2>
+            <p>
+              Hay decisiones que requieren calma, análisis y quizá un snack. La invitación
+              queda abierta.
+            </p>
             <a className="renata-whatsapp" href={whatsappUrl} target="_blank" rel="noreferrer">
-              Responder después
+              Te respondo por WhatsApp
             </a>
           </div>
         )}
