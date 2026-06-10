@@ -143,10 +143,10 @@
 .renata-whatsapp {
   min-height: 52px;
   padding: 13px 16px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid #6c6680;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.055);
-  color: #f5f5f7;
+  background: #262638;
+  color: #ffffff;
   text-align: left;
   text-decoration: none;
   transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
@@ -155,18 +155,18 @@
 .renata-option:hover,
 .renata-whatsapp:hover {
   transform: translateY(-2px);
-  border-color: rgba(255, 92, 138, 0.62);
-  background: rgba(255, 92, 138, 0.11);
+  border-color: #ff8aae;
+  background: #35283d;
 }
 
 .renata-option--primary,
 .renata-whatsapp {
   width: fit-content;
-  background: linear-gradient(135deg, #9b5cff, #ff5c8a);
+  background: linear-gradient(135deg, #6f35d8, #b51f5b);
   border-color: transparent;
   font-weight: 800;
   text-align: center;
-  box-shadow: 0 16px 32px rgba(155, 92, 255, 0.22);
+  box-shadow: 0 16px 32px rgba(111, 53, 216, 0.28);
 }
 
 .renata-option--selected {

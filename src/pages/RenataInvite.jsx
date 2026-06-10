@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import PropTypes from "prop-types";
 import "./RenataInvite.css";
 
 const inviteDetails = {
@@ -43,6 +44,10 @@ function TerminalBlock({ children }) {
   return <div className="renata-terminal">{children}</div>;
 }
 
+TerminalBlock.propTypes = {
+  children: PropTypes.node.isRequired
+};
+
 function OptionButton({ children, onClick, variant = "default" }) {
   return (
     <button className={`renata-option renata-option--${variant}`} type="button" onClick={onClick}>
@@ -51,6 +56,12 @@ function OptionButton({ children, onClick, variant = "default" }) {
   );
 }
 
+OptionButton.propTypes = {
+  children: PropTypes.node.isRequired,
+  onClick: PropTypes.func.isRequired,
+  variant: PropTypes.string
+};
+
 function ProgressBar({ value }) {
   return (
     <div className="renata-progress" aria-label={`Progreso ${value}%`}>
@@ -58,6 +69,10 @@ function ProgressBar({ value }) {
     </div>
   );
 }
+
+ProgressBar.propTypes = {
+  value: PropTypes.number.isRequired
+};
 
 export default function RenataInvite() {
   const [step, setStep] = useState("welcome");
