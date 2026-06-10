@@ -4,6 +4,8 @@
 
 .secondary-layout {
   padding: 110px 48px 40px;
+  display: flex;
+  justify-content: center;
 }
 
 @media (max-width: 1200px) {

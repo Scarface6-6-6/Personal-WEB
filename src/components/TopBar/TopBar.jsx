@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import "./TopBar.css";
 
-export default function TopBar({ menuOpen, onMenuEnter, onMenuLeave, onMenuToggle }) {
+export default function TopBar({ isHome, menuOpen, onMenuEnter, onMenuLeave, onMenuToggle }) {
   const { i18n, t } = useTranslation();
 
   const setLanguage = (language) => {
@@ -13,21 +13,29 @@ export default function TopBar({ menuOpen, onMenuEnter, onMenuLeave, onMenuToggl
 
   return (
     <header className="topbar">
-      <div className="topbar__lang" aria-label="language-switcher">
-        <button
-          type="button"
-          className={i18n.language === "es" ? "topbar__lang-active" : "topbar__lang-btn"}
-          onClick={() => setLanguage("es")}
-        >
-          {t("language.es")}
-        </button>
-        <button
-          type="button"
-          className={i18n.language === "en" ? "topbar__lang-active" : "topbar__lang-btn"}
-          onClick={() => setLanguage("en")}
-        >
-          {t("language.en")}
-        </button>
+      <div className="topbar__left">
+        {!isHome && (
+          <Link to="/" className="topbar__back" aria-label="back to home">
+            ←
+          </Link>
+        )}
+
+        <div className="topbar__lang" aria-label="language-switcher">
+          <button
+            type="button"
+            className={i18n.language === "es" ? "topbar__lang-active" : "topbar__lang-btn"}
+            onClick={() => setLanguage("es")}
+          >
+            {t("language.es")}
+          </button>
+          <button
+            type="button"
+            className={i18n.language === "en" ? "topbar__lang-active" : "topbar__lang-btn"}
+            onClick={() => setLanguage("en")}
+          >
+            {t("language.en")}
+          </button>
+        </div>
       </div>
 
       <Link to="/" className="topbar__brand" aria-label="go home">
@@ -49,6 +57,7 @@ export default function TopBar({ menuOpen, onMenuEnter, onMenuLeave, onMenuToggl
 }
 
 TopBar.propTypes = {
+  isHome: PropTypes.bool.isRequired,
   menuOpen: PropTypes.bool.isRequired,
   onMenuEnter: PropTypes.func.isRequired,
   onMenuLeave: PropTypes.func.isRequired,
