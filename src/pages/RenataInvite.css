@@ -6,10 +6,10 @@
   place-items: center;
   padding: 32px 16px;
   background:
-    radial-gradient(circle at 20% 18%, rgba(155, 92, 255, 0.22), transparent 34%),
-    radial-gradient(circle at 82% 84%, rgba(255, 92, 138, 0.16), transparent 30%),
-    linear-gradient(145deg, #070711 0%, #10101d 48%, #070711 100%);
-  color: #f5f5f7;
+    radial-gradient(circle at 18% 18%, rgba(255, 196, 214, 0.7), transparent 34%),
+    radial-gradient(circle at 82% 78%, rgba(184, 216, 255, 0.62), transparent 32%),
+    linear-gradient(145deg, #fff7fb 0%, #f8f1ff 48%, #f4fbff 100%);
+  color: #2d2433;
   font-family: "Inter", "Poppins", system-ui, sans-serif;
 }
 
@@ -19,8 +19,8 @@
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(111, 86, 124, 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(111, 86, 124, 0.08) 1px, transparent 1px);
   background-size: 42px 42px;
   mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.8), transparent 88%);
 }
@@ -30,10 +30,10 @@
   z-index: 1;
   width: min(720px, 100%);
   padding: 24px;
-  border: 1px solid rgba(155, 92, 255, 0.24);
+  border: 1px solid rgba(216, 156, 188, 0.52);
   border-radius: 8px;
-  background: rgba(17, 17, 31, 0.82);
-  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.46), 0 0 46px rgba(155, 92, 255, 0.13);
+  background: rgba(255, 252, 254, 0.86);
+  box-shadow: 0 24px 70px rgba(129, 94, 121, 0.18), 0 0 34px rgba(255, 196, 214, 0.22);
   backdrop-filter: blur(18px);
 }
 
@@ -46,35 +46,47 @@
 }
 
 .renata-logo,
-.renata-kicker,
 .renata-eyebrow,
 .renata-step,
-.renata-terminal {
+.renata-terminal,
+.renata-code-block,
+.renata-achievement {
   font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
 }
 
 .renata-logo {
+  appearance: none;
+  padding: 0;
+  border: 0;
+  background: transparent;
   margin: 0 0 4px;
-  color: #ff5c8a;
+  color: #c74776;
   font-size: 0.95rem;
   font-weight: 800;
   letter-spacing: 0;
+  cursor: pointer;
 }
 
-.renata-kicker,
+.renata-achievement {
+  max-width: 220px;
+  margin: 6px 0 0;
+  color: #6a4a10;
+  font-size: 0.72rem;
+}
+
 .renata-eyebrow,
 .renata-step {
   margin: 0;
-  color: #a0a0b8;
+  color: #6d6175;
   font-size: 0.78rem;
 }
 
 .renata-step {
   flex: 0 0 auto;
   padding: 7px 10px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(199, 129, 167, 0.34);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(255, 238, 246, 0.72);
 }
 
 .renata-progress {
@@ -82,14 +94,14 @@
   overflow: hidden;
   margin-bottom: 26px;
   border-radius: 999px;
-  background: #17172a;
+  background: #eaddea;
 }
 
 .renata-progress span {
   display: block;
   height: 100%;
   border-radius: inherit;
-  background: linear-gradient(90deg, #9b5cff, #ff5c8a);
+  background: linear-gradient(90deg, #f59fbc, #aacfff);
   transition: width 420ms ease;
 }
 
@@ -99,22 +111,23 @@
   min-height: 420px;
   align-content: center;
   padding: clamp(18px, 5vw, 42px);
-  border: 1px solid rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(205, 166, 193, 0.48);
   border-radius: 8px;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.045), transparent),
-    rgba(23, 23, 42, 0.72);
+    linear-gradient(135deg, rgba(255, 242, 248, 0.82), rgba(244, 251, 255, 0.7)),
+    rgba(255, 255, 255, 0.84);
+  animation: renataCardIn 260ms ease both;
 }
 
 .renata-card--reveal {
-  box-shadow: inset 0 0 38px rgba(155, 92, 255, 0.08);
+  box-shadow: inset 0 0 38px rgba(245, 159, 188, 0.14);
 }
 
 .renata-card h1,
 .renata-card h2 {
   max-width: 620px;
   margin: 0;
-  color: #ffffff;
+  color: #2d2433;
   font-size: clamp(2rem, 7vw, 4.5rem);
   line-height: 0.95;
   letter-spacing: 0;
@@ -128,9 +141,23 @@
 .renata-card p {
   max-width: 600px;
   margin: 0;
-  color: #d8d6e7;
+  color: #584d61;
   font-size: clamp(1rem, 2vw, 1.12rem);
   line-height: 1.7;
+}
+
+.renata-title-break {
+  display: block;
+  margin-top: 8px;
+}
+
+.renata-reveal-text {
+  max-width: 600px;
+  margin: 0;
+  white-space: pre-wrap;
+  color: #584d61;
+  font: inherit;
+  line-height: 1.65;
 }
 
 .renata-options {
@@ -143,10 +170,10 @@
 .renata-whatsapp {
   min-height: 52px;
   padding: 13px 16px;
-  border: 1px solid #6c6680;
+  border: 1px solid #d4adc4;
   border-radius: 8px;
-  background: #262638;
-  color: #ffffff;
+  background: #fff8fb;
+  color: #34283b;
   text-align: left;
   text-decoration: none;
   transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
@@ -155,33 +182,104 @@
 .renata-option:hover,
 .renata-whatsapp:hover {
   transform: translateY(-2px);
-  border-color: #ff8aae;
-  background: #35283d;
+  border-color: #c74776;
+  background: #ffeaf2;
+  box-shadow: 0 16px 34px rgba(199, 71, 118, 0.16);
+}
+
+.renata-option:active,
+.renata-whatsapp:active {
+  transform: scale(0.98);
+}
+
+.renata-option:disabled {
+  cursor: wait;
+  opacity: 0.82;
+}
+
+.renata-option:disabled:hover {
+  transform: none;
+  border-color: transparent;
 }
 
 .renata-option--primary,
 .renata-whatsapp {
   width: fit-content;
-  background: linear-gradient(135deg, #6f35d8, #b51f5b);
+  background: linear-gradient(135deg, #ffd1e0, #b8d8ff);
   border-color: transparent;
   font-weight: 800;
   text-align: center;
-  box-shadow: 0 16px 32px rgba(111, 53, 216, 0.28);
+  box-shadow: 0 16px 32px rgba(199, 71, 118, 0.18);
 }
 
 .renata-option--selected {
-  border-color: rgba(74, 222, 128, 0.8);
-  background: rgba(74, 222, 128, 0.12);
+  border-color: #6d9d8d;
+  background: #e9fff5;
+}
+
+.renata-loading-button {
+  display: grid;
+  gap: 7px;
+}
+
+.renata-loading-button__status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #5d410d;
+  font-family: "JetBrains Mono", "Fira Code", Consolas, monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.renata-loading-button__bar {
+  width: 74px;
+  height: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(93, 65, 13, 0.28);
+  border-radius: 999px;
+  background: rgba(255, 248, 220, 0.72);
+}
+
+.renata-loading-button__bar span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background:
+    linear-gradient(
+      90deg,
+      #7b560f 0 42%,
+      #a77a1f 42% 58%,
+      #7b560f 58% 100%
+  );
+  background-size: 32px 100%;
+  animation: renataLoading 850ms linear infinite;
+  transition: width 70ms linear;
 }
 
 .renata-terminal {
   padding: 16px;
-  border: 1px solid rgba(74, 222, 128, 0.22);
+  border: 1px solid #f0c86e;
   border-radius: 8px;
-  background: rgba(7, 7, 17, 0.78);
-  color: #4ade80;
+  background: #fff8dc;
+  color: #6a4a10;
   font-size: 0.92rem;
   line-height: 1.65;
+  box-shadow: 0 12px 28px rgba(240, 200, 110, 0.16);
+}
+
+.renata-code-block {
+  display: grid;
+  gap: 6px;
+  padding: 16px;
+  border: 1px solid rgba(106, 74, 16, 0.2);
+  border-radius: 8px;
+  background: #2f2431;
+  color: #fff8dc;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  box-shadow: 0 14px 32px rgba(47, 36, 49, 0.14);
 }
 
 .renata-terminal p {
@@ -190,12 +288,66 @@
   font: inherit;
 }
 
+.renata-plan,
+.renata-note,
+.renata-stats {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid rgba(199, 129, 167, 0.28);
+  border-radius: 8px;
+  background: rgba(255, 248, 251, 0.78);
+}
+
+.renata-plan p,
+.renata-note p,
+.renata-stats p {
+  margin: 0;
+}
+
+.renata-plan ul {
+  display: grid;
+  gap: 8px;
+  padding: 0;
+  margin: 0;
+  color: #3a2d42;
+  list-style: none;
+}
+
+.renata-note span {
+  border-bottom: 1px dotted #c74776;
+  color: #8f2f55;
+  cursor: help;
+}
+
+.renata-stats dl {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+}
+
+.renata-stats div {
+  display: grid;
+  gap: 3px;
+}
+
+.renata-stats dt {
+  color: #6d6175;
+  font-size: 0.9rem;
+}
+
+.renata-stats dd {
+  margin: 0;
+  color: #2d2433;
+  font-weight: 800;
+}
+
 .renata-checks {
   display: grid;
   gap: 8px;
   padding: 0;
   margin: 0;
-  color: #f5f5f7;
+  color: #3a2d42;
   list-style: none;
 }
 
@@ -204,7 +356,7 @@
   width: 7px;
   height: 7px;
   border-radius: 999px;
-  background: #ff5c8a;
+  background: #f59fbc;
   opacity: 0.44;
   animation: renataFloat 7s ease-in-out infinite;
 }
@@ -218,7 +370,7 @@
   left: 82%;
   top: 16%;
   animation-delay: -2s;
-  background: #9b5cff;
+  background: #aacfff;
 }
 
 .renata-particles span:nth-child(3) {
@@ -231,14 +383,14 @@
   left: 18%;
   top: 82%;
   animation-delay: -3s;
-  background: #4ade80;
+  background: #b9efd9;
 }
 
 .renata-particles span:nth-child(5) {
   left: 48%;
   top: 10%;
   animation-delay: -5s;
-  background: #facc15;
+  background: #ffe08a;
 }
 
 @keyframes renataFloat {
@@ -249,6 +401,28 @@
 
   50% {
     transform: translate3d(10px, -18px, 0);
+  }
+}
+
+@keyframes renataCardIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes renataLoading {
+  from {
+    background-position: 0 0;
+  }
+
+  to {
+    background-position: 32px 0;
   }
 }
 
