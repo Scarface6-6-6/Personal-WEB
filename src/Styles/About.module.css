@@ -1,6 +1,98 @@
-.h3 {
-  max-width: 760px;
+.readme {
+  width: min(980px, 100%);
+  margin: 0 auto;
+  padding: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(167, 107, 255, 0.08), transparent 140px),
+    rgba(8, 11, 22, 0.34);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+}
+
+.readme::before {
+  content: "andrez@portfolio:~/README.md";
+  display: block;
   margin-bottom: 1.4rem;
-  font-size: clamp(0.95rem, 3vw, 1.2rem);
-  line-height: 1.7;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--green);
+  font-family: "Courier New", monospace;
+  font-size: 0.88rem;
+  letter-spacing: 0;
+}
+
+.readme h2 {
+  margin-bottom: 2rem;
+  font-family: "Courier New", monospace;
+  font-size: clamp(1.6rem, 4vw, 2.6rem);
+  letter-spacing: 0;
+}
+
+.section {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 1.6rem 0;
+  border-top: 1px solid var(--border);
+}
+
+.section h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin: 0 0 1rem;
+  color: var(--purple);
+  font-size: 1.15rem;
+}
+
+.section h3::before {
+  content: ">";
+  color: var(--green);
+  font-family: "Courier New", monospace;
+}
+
+.section p {
+  margin: 0 0 0.85rem;
+  color: var(--text);
+  font-size: clamp(0.98rem, 2vw, 1.08rem);
+  line-height: 1.75;
+}
+
+.section ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.section li {
+  padding-left: 0.35rem;
+  margin-bottom: 0.65rem;
+  color: var(--text);
+  line-height: 1.65;
+}
+
+.section li::marker {
+  color: var(--green);
+}
+
+.codeBlock {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 1.1rem 1.25rem;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background:
+    linear-gradient(90deg, rgba(96, 239, 190, 0.08), transparent 48%),
+    rgba(8, 11, 22, 0.82);
+  color: var(--green);
+  font-family: "Courier New", monospace;
+  font-size: 0.96rem;
+  line-height: 1.65;
+}
+
+@media (max-width: 760px) {
+  .readme {
+    padding: 1.25rem;
+    border-radius: 14px;
+  }
 }

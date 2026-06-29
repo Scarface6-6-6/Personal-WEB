@@ -65,7 +65,7 @@ describe("Home and component rendering", () => {
   it("renders TopBar", () => {
     const { container } = render(
       <BrowserRouter>
-        <TopBar menuOpen={false} onMenuEnter={() => {}} onMenuLeave={() => {}} onMenuToggle={() => {}} />
+        <TopBar isHome menuOpen={false} onMenuEnter={() => {}} onMenuLeave={() => {}} onMenuToggle={() => {}} />
       </BrowserRouter>
     );
 
@@ -77,7 +77,7 @@ describe("Home and component rendering", () => {
   it("updates localStorage when switching language in TopBar", () => {
     const { container } = render(
       <BrowserRouter>
-        <TopBar menuOpen={false} onMenuEnter={() => {}} onMenuLeave={() => {}} onMenuToggle={() => {}} />
+        <TopBar isHome menuOpen={false} onMenuEnter={() => {}} onMenuLeave={() => {}} onMenuToggle={() => {}} />
       </BrowserRouter>
     );
 
@@ -87,6 +87,16 @@ describe("Home and component rendering", () => {
     });
 
     expect(globalThis.localStorage.getItem("language")).toBe("en");
+  });
+
+  it("shows a back button in TopBar outside the home route", () => {
+    const { container } = render(
+      <BrowserRouter>
+        <TopBar isHome={false} menuOpen={false} onMenuEnter={() => {}} onMenuLeave={() => {}} onMenuToggle={() => {}} />
+      </BrowserRouter>
+    );
+
+    expect(container.querySelector(".topbar__back")?.getAttribute("href")).toBe("/");
   });
 
   it("renders SocialRail links", () => {
@@ -104,7 +114,7 @@ describe("Home and component rendering", () => {
       </BrowserRouter>
     );
 
-    expect(container.textContent).toContain("About Me");
+    expect(container.textContent).toContain("README");
     expect(container.textContent).not.toContain("×");
     expect(container.querySelector(".menu-item.active")?.textContent).toContain("Now");
   });

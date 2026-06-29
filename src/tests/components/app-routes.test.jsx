@@ -35,7 +35,7 @@ describe("App routes", () => {
   it("renders About route", () => {
     const container = renderAt("/about");
 
-    expect(container.textContent).toContain("Sobre mi");
+    expect(container.textContent).toContain("Proyecto: Andrez Pantoja");
     expect(container.textContent).toContain("Scarface_666");
   });
 

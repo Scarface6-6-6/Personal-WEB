@@ -5,7 +5,7 @@
     "en": "EN"
   },
   "menu": {
-    "about": "About Me",
+    "about": "README",
     "likes": "Gustos",
     "gallery": "Galeria",
     "now": "Ahora",
@@ -25,10 +25,8 @@
     "songLink": "Escuchar cancion de la semana"
   },
   "about": {
-    "eyebrow": "README",
-    "title": "Sobre mi",
-    "text1": "Soy una persona apasionada por la tecnologia y el desarrollo web. Me encanta aprender cosas nuevas y compartir mis conocimientos con otros.",
-    "text2": "Con experiencia en desarrollo full-stack, me especializo en crear soluciones innovadoras y eficientes. Siempre busco mejorar mis habilidades y explorar nuevas tecnologias."
+    "eyebrow": "README.md",
+    "title": "Proyecto: Andrez Pantoja"
   },
   "likes": {
     "eyebrow": "MIS GUSTOS",
