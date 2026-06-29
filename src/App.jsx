@@ -1,4 +1,4 @@
-﻿import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import AppLayout from "./components/AppLayout/AppLayout";
 import About from "./pages/About";
 import Galeria from "./pages/Galeria";
@@ -23,6 +23,7 @@ function App() {
           <Route path="/redes" element={<Redes />} />
           <Route path="/links" element={<Redes />} />
           <Route path="/now" element={<Now />} />
+          <Route path="/renata" element={<Navigate to="/" replace />} />
         </Route>
       </Routes>
     </BrowserRouter>
@@ -30,4 +31,3 @@ function App() {
 }
 
 export default App;
-

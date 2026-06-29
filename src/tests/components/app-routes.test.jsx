@@ -23,6 +23,14 @@ const renderAt = (path) => {
   return container;
 };
 
+const finishInterestLoading = async () => {
+  for (let timerCount = 0; timerCount < 8; timerCount += 1) {
+    await act(async () => {
+      vi.runOnlyPendingTimers();
+    });
+  }
+};
+
 describe("App routes", () => {
   it("renders Home route with shell", () => {
     const container = renderAt("/");
@@ -39,12 +47,20 @@ describe("App routes", () => {
     expect(container.textContent).toContain("Scarface_666");
   });
 
-  it("renders Gustos route aliases", () => {
+  it("renders Gustos route aliases", async () => {
+    vi.useFakeTimers();
     const gustos = renderAt("/gustos");
+    await finishInterestLoading();
     const likes = renderAt("/likes");
+    await finishInterestLoading();
 
-    expect(gustos.textContent).toContain("Musica y Comida");
-    expect(likes.textContent).toContain("Musica y Comida");
+    expect(gustos.textContent).toContain("$ load interests");
+    expect(gustos.textContent).toContain("System ready.");
+    expect(gustos.textContent).toContain("Music");
+    expect(likes.textContent).toContain("$ load interests");
+    expect(likes.textContent).toContain("System ready.");
+    expect(likes.textContent).toContain("Food");
+    vi.useRealTimers();
   });
 
   it("renders Galeria route aliases", () => {
@@ -69,12 +85,11 @@ describe("App routes", () => {
     expect(container.textContent).toContain("Que estoy haciendo");
   });
 
-  it("renders Renata invite route without the main shell copy", () => {
+  it("redirects Renata route to home", () => {
     const container = renderAt("/renata");
 
-    expect(container.textContent).toContain("Hola, Ollin.");
-    expect(container.textContent).toContain("Iniciar encuesta");
-    expect(container.textContent).not.toContain("Rollo de fotos");
+    expect(container.textContent).toContain("Scarface_666");
+    expect(window.location.pathname).toBe("/");
   });
 });
 
