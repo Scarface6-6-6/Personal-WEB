@@ -1,38 +1,33 @@
-﻿import { useTranslation } from "react-i18next";
-import { gustos } from "../data/gustos";
+import { useCallback, useMemo, useState } from "react";
+import { InterestModule } from "../components/interests/InterestModule";
+import { InterestsTerminalHeader } from "../components/interests/InterestsTerminalHeader";
+import { interests } from "../data/interests";
 import styles from "../Styles/Gustos.module.css";
 
 export default function Gustos() {
-  const { t } = useTranslation();
+  const [isReady, setIsReady] = useState(false);
+  const interestCommands = useMemo(
+    () => interests.map((module) => module.command),
+    []
+  );
+  const handleLoadComplete = useCallback(() => {
+    setIsReady(true);
+  }, []);
 
   return (
-    <div className="screen active">
-      <div className="eyebrow">{t("likes.eyebrow")}</div>
-      <h2>{t("likes.title")}</h2>
-      <h3>{t("likes.subtitle")}</h3>
+    <main className={`screen active ${styles.likesPage}`}>
+      <InterestsTerminalHeader
+        commands={interestCommands}
+        onComplete={handleLoadComplete}
+      />
 
-      <div className={styles.gustosContainer}>
-        <div className={styles.gustosSection}>
-          <div className="eyebrow">{t("likes.music")}</div>
-          <div className={styles.gustosList}>
-            {gustos.musica?.map((item) => (
-              <p key={item}>{t("likes.musicItem")}: {item}</p>
-            ))}
-          </div>
-        </div>
-
-        {gustos.comida && (
-          <div className={styles.gustosSection}>
-            <div className="eyebrow">{t("likes.food")}</div>
-            <div className={styles.gustosList}>
-              {gustos.comida.map((item) => (
-                <p key={item}>{t("likes.foodItem")}: {item}</p>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
+      {isReady && (
+        <section className={`${styles.interestsGrid} ${styles.interestsGridReady}`}>
+          {interests.map((module) => (
+            <InterestModule key={module.id} module={module} />
+          ))}
+        </section>
+      )}
+    </main>
   );
 }
-

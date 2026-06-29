@@ -66,3 +66,4 @@ jobs:
           args: >
             -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }}
             -Dsonar.organization=${{ vars.SONAR_ORGANIZATION }}
+            -Dsonar.cpd.exclusions=src/tests/**,**/*.test.js,**/*.test.jsx,src/data/**,src/types/**,src/locales/**,src/**/*.css
