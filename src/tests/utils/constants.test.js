@@ -5,6 +5,9 @@ describe("constants", () => {
   it("has expected menu structure", () => {
     expect(MENU_ITEMS).toHaveLength(5);
     expect(MENU_ITEMS[0]).toEqual({ key: "about", path: "/about", aliases: ["/about"] });
+    expect(MENU_ITEMS[1].path).toBe("/interesed");
+    expect(MENU_ITEMS[1].aliases).toContain("/interesed");
+    expect(MENU_ITEMS[1].aliases).toContain("/likes");
     expect(MENU_ITEMS[1].aliases).toContain("/gustos");
     expect(MENU_ITEMS[2].aliases).toContain("/galeria");
     expect(MENU_ITEMS[4].aliases).toContain("/redes");
