@@ -15,10 +15,22 @@ describe("constants", () => {
 
   it("has expected social structure", () => {
     expect(SOCIAL_ITEMS).toHaveLength(3);
+    expect(SOCIAL_ITEMS.find((item) => item.key === "discord")).toMatchObject({
+      action: "copy",
+      username: "scarface.666"
+    });
+    expect(SOCIAL_ITEMS.find((item) => item.key === "instagram")?.url).toBe(
+      "https://www.instagram.com/andrez.pantoja/"
+    );
+    expect(SOCIAL_ITEMS.find((item) => item.key === "twitch")?.url).toBe(
+      "https://www.twitch.tv/scarface6_6_6"
+    );
     SOCIAL_ITEMS.forEach((item) => {
       expect(item.label.length).toBeGreaterThan(0);
-      expect(item.url.startsWith("https://")).toBe(true);
       expect(item.icon).toBeTruthy();
+      if (item.url) {
+        expect(item.url.startsWith("https://")).toBe(true);
+      }
     });
   });
 });

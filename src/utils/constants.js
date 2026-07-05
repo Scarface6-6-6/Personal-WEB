@@ -11,7 +11,7 @@ export const MENU_ITEMS = [
 ];
 
 export const SOCIAL_ITEMS = [
-  { key: "discord", label: "Discord", url: "https://discord.com", icon: discord },
-  { key: "instagram", label: "Instagram", url: "https://instagram.com", icon: instagram },
-  { key: "twitch", label: "Twitch", url: "https://twitch.tv", icon: twitch }
+  { key: "discord", label: "Discord", username: "scarface.666", action: "copy", icon: discord },
+  { key: "instagram", label: "Instagram", url: "https://www.instagram.com/andrez.pantoja/", icon: instagram },
+  { key: "twitch", label: "Twitch", url: "https://www.twitch.tv/scarface6_6_6", icon: twitch }
 ];

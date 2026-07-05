@@ -29,6 +29,10 @@
 
 .social-link {
   color: #ffffff;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
   text-decoration: none;
   font-size: 28px;
   transition: transform 0.3s ease;

@@ -81,7 +81,9 @@ describe("App routes", () => {
     const links = renderAt("/links");
 
     expect(redes.textContent).toContain("Mis Redes");
+    expect(redes.textContent).toContain("scarface.666");
     expect(links.textContent).toContain("Mis Redes");
+    expect(links.textContent).toContain("scarface.666");
   });
 
   it("renders Now route", () => {
@@ -90,11 +92,12 @@ describe("App routes", () => {
     expect(container.textContent).toContain("Que estoy haciendo");
   });
 
-  it("redirects Renata route to home", () => {
+  it("does not render Renata route in the app", () => {
     const container = renderAt("/renata");
 
-    expect(container.textContent).toContain("Scarface_666");
-    expect(window.location.pathname).toBe("/");
+    expect(container.textContent).not.toContain("Scarface_666");
+    expect(container.textContent).not.toContain("Hola, Ollin.");
+    expect(window.location.pathname).toBe("/renata");
   });
 });
 

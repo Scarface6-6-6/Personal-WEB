@@ -15,6 +15,7 @@
   border-radius: 8px;
   background: rgba(244, 240, 232, 0.03);
   color: inherit;
+  font: inherit;
   text-decoration: none;
   transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
 }
@@ -33,6 +34,16 @@
 .redesCard span {
   font-size: 0.9rem;
   font-weight: 600;
+}
+
+.redesCard strong {
+  color: var(--purple);
+  font-size: 0.95rem;
+}
+
+.redesCard small {
+  color: var(--muted);
+  font-size: 0.8rem;
 }
 
 @media (max-width: 860px) {

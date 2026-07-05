@@ -102,7 +102,8 @@ describe("Home and component rendering", () => {
   it("renders SocialRail links", () => {
     const { container } = render(<SocialRail />);
 
-    expect(container.querySelectorAll("a").length).toBe(3);
+    expect(container.querySelectorAll("a").length).toBe(2);
+    expect(container.querySelectorAll("button").length).toBe(1);
   });
 
   it("renders RightMenu without close button", () => {
