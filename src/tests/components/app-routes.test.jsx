@@ -47,13 +47,18 @@ describe("App routes", () => {
     expect(container.textContent).toContain("Scarface_666");
   });
 
-  it("renders Gustos route aliases", async () => {
+  it("renders interests route aliases", async () => {
     vi.useFakeTimers();
+    const interesed = renderAt("/interesed");
+    await finishInterestLoading();
     const gustos = renderAt("/gustos");
     await finishInterestLoading();
     const likes = renderAt("/likes");
     await finishInterestLoading();
 
+    expect(interesed.textContent).toContain("$ load interests");
+    expect(interesed.textContent).toContain("System ready.");
+    expect(interesed.textContent).toContain("Music");
     expect(gustos.textContent).toContain("$ load interests");
     expect(gustos.textContent).toContain("System ready.");
     expect(gustos.textContent).toContain("Music");

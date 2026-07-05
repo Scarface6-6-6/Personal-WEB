@@ -4,7 +4,7 @@ import discord from "../assets/discord_line_black.png";
 
 export const MENU_ITEMS = [
   { key: "about", path: "/about", aliases: ["/about"] },
-  { key: "likes", path: "/likes", aliases: ["/likes", "/gustos"] },
+  { key: "likes", path: "/interesed", aliases: ["/interesed", "/likes", "/gustos"] },
   { key: "gallery", path: "/gallery", aliases: ["/gallery", "/galeria"] },
   { key: "now", path: "/now", aliases: ["/now"] },
   { key: "links", path: "/links", aliases: ["/links", "/redes"] }
