@@ -1,12 +1,170 @@
-﻿.home {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-  align-items: stretch;
+.home {
+  gap: 2rem;
 }
 
-.home > * {
+.home__boot-card {
+  min-height: 430px;
+  display: grid;
+  align-content: start;
+}
+
+.home__boot-card pre {
+  min-height: 250px;
+}
+
+.home__loading {
+  margin: 0;
+  color: var(--purple);
+  font-family: "Courier New", monospace;
+  animation: home-pulse 900ms ease-in-out infinite;
+}
+
+.home__boot-summary {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.home__terminal-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.home__loaded-content {
+  display: grid;
+  gap: 2rem;
+  animation: home-reveal 460ms ease-out both;
+}
+
+.home__bars {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.home__photo-roll-card {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 1.5rem;
+}
+
+.home__photo-roll-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(164, 97, 255, 0.16), transparent 32%),
+    linear-gradient(135deg, rgba(94, 234, 212, 0.07), transparent 44%);
+}
+
+.home__photo-roll-card p {
+  position: relative;
+  max-width: 720px;
+  margin: 0 0 1rem;
+  color: var(--muted);
+  line-height: 1.65;
+}
+
+.home__photo-sweep {
+  position: relative;
+  display: grid;
+  gap: 1rem;
+}
+
+.home__photo-sweep-frame {
+  position: relative;
+  min-height: clamp(420px, 52vw, 720px);
+  overflow: hidden;
+  border: 1px solid rgba(164, 97, 255, 0.28);
+  border-radius: 32px;
+  background: linear-gradient(145deg, rgba(17, 14, 36, 0.92), rgba(7, 8, 20, 0.82));
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.34);
+  isolation: isolate;
+  animation: photo-sweep-in 720ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.home__photo-sweep-frame::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(5, 7, 18, 0.62), transparent 42%, rgba(5, 7, 18, 0.28)),
+    linear-gradient(180deg, transparent 42%, rgba(5, 7, 18, 0.92));
+}
+
+.home__photo-sweep-frame img {
   width: 100%;
+  height: clamp(420px, 52vw, 720px);
+  display: block;
+  object-fit: cover;
+  object-position: center;
+  image-rendering: auto;
+  transform: scale(1.03);
+  animation: photo-sweep-zoom 3000ms ease-out both;
+}
+
+.home__photo-sweep-shine {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(105deg, transparent 0%, transparent 36%, rgba(255, 255, 255, 0.22) 48%, transparent 60%, transparent 100%);
+  mix-blend-mode: screen;
+  transform: translateX(-120%);
+  animation: photo-sweep-shine 3000ms ease-in-out both;
+}
+
+.home__photo-sweep figcaption {
+  position: absolute;
+  inset: auto 0 0 0;
+  z-index: 3;
+  display: grid;
+  gap: 0.35rem;
+  padding: clamp(4rem, 9vw, 7rem) clamp(1rem, 3vw, 2rem) clamp(1rem, 3vw, 2rem);
+  margin: 0;
+  background: linear-gradient(180deg, transparent, rgba(5, 7, 18, 0.96));
+  color: var(--text);
+  font-family: "Courier New", monospace;
+}
+
+.home__photo-sweep figcaption span {
+  color: var(--purple);
+  font-size: 0.9rem;
+}
+
+.home__photo-sweep figcaption strong {
+  max-width: 760px;
+  font-size: clamp(1.6rem, 4vw, 3.8rem);
+  letter-spacing: -0.06em;
+}
+
+.home__photo-sweep figcaption small {
+  color: var(--muted);
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
+}
+
+.home__photo-sweep-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.home__photo-sweep-dots button {
+  width: 42px;
+  height: 4px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(164, 97, 255, 0.24);
+  cursor: pointer;
+  transition: width 220ms ease, background 220ms ease, box-shadow 220ms ease;
+}
+
+.home__photo-sweep-dots button:hover,
+.home__photo-sweep-dots .is-active {
+  width: 64px;
+  background: var(--purple);
+  box-shadow: 0 0 18px rgba(164, 97, 255, 0.5);
 }
 
 .home__layout {
@@ -27,66 +185,101 @@
   width: 100%;
 }
 
-.home__box--profile,
-.home__box--gallery,
-.home__box--readme,
-.home__box--song {
-  min-height: 900px;
-}
-
-.home__box--readme {
-  position: relative;
-}
-
-.home__box--readme::after {
-  content: "";
-  position: absolute;
-  right: 26px;
-  bottom: 22px;
-  width: 190px;
-  height: 120px;
-  background-image: radial-gradient(rgba(167, 107, 255, 0.5) 1.2px, transparent 1.2px);
-  background-size: 12px 12px;
-  opacity: 0.7;
-  pointer-events: none;
-}
-
-.home__gallery-preview {
-  height: 300px;
-  border-radius: 14px;
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  border: 1px solid var(--border);
-}
-
-.home__song-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 14px;
-  border: 1px solid var(--purple);
-  color: var(--text);
-  border-radius: 10px;
-  text-decoration: none;
-  background: rgba(167, 107, 255, 0.12);
-}
-
 @media (max-width: 1200px) {
   .home__layout {
     grid-template-columns: 1fr;
     padding: 100px 16px 24px;
   }
+}
 
-  .home__box--gallery,
-  .home__box--readme,
-  .home__box--profile,
-  .home__box--song {
+@media (max-width: 860px) {
+  .home__terminal-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .home__boot-card {
     min-height: 500px;
   }
 
-  .home__box--readme::after {
-    display: none;
+  .home__photo-sweep-frame,
+  .home__photo-sweep-frame img {
+    min-height: 460px;
+    height: 460px;
   }
 }
 
+@media (max-width: 520px) {
+  .home__photo-sweep-frame,
+  .home__photo-sweep-frame img {
+    min-height: 380px;
+    height: 380px;
+  }
+
+  .home__photo-sweep-dots button {
+    width: 30px;
+  }
+}
+
+@keyframes home-pulse {
+  0%,
+  100% {
+    opacity: 0.45;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes home-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes photo-sweep-in {
+  from {
+    clip-path: inset(0 100% 0 0 round 32px);
+    opacity: 0.65;
+  }
+
+  to {
+    clip-path: inset(0 0 0 0 round 32px);
+    opacity: 1;
+  }
+}
+
+@keyframes photo-sweep-zoom {
+  from {
+    filter: saturate(0.82) contrast(0.96);
+    transform: scale(1.08);
+  }
+
+  to {
+    filter: saturate(1.05) contrast(1.02);
+    transform: scale(1.02);
+  }
+}
+
+@keyframes photo-sweep-shine {
+  0% {
+    transform: translateX(-120%);
+    opacity: 0;
+  }
+
+  28% {
+    opacity: 0.9;
+  }
+
+  58%,
+  100% {
+    transform: translateX(120%);
+    opacity: 0;
+  }
+}

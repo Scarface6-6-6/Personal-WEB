@@ -1,6 +1,4 @@
-import instagram from "../assets/instagram_line_black.png";
-import twitch from "../assets/twitch.png";
-import discord from "../assets/discord_line_black.png";
+import { socialLinks } from "../data/socialLinks";
 
 export const MENU_ITEMS = [
   { key: "about", path: "/about", aliases: ["/about"] },
@@ -10,8 +8,8 @@ export const MENU_ITEMS = [
   { key: "links", path: "/links", aliases: ["/links", "/redes"] }
 ];
 
-export const SOCIAL_ITEMS = [
-  { key: "discord", label: "Discord", username: "scarface.666", action: "copy", icon: discord },
-  { key: "instagram", label: "Instagram", url: "https://www.instagram.com/andrez.pantoja/", icon: instagram },
-  { key: "twitch", label: "Twitch", url: "https://www.twitch.tv/scarface6_6_6", icon: twitch }
-];
+export const SOCIAL_ITEMS = socialLinks.map((item) => ({
+  ...item,
+  key: item.id,
+  label: item.title
+}));

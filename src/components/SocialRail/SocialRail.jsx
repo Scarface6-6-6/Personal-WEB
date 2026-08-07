@@ -3,7 +3,7 @@ import "./SocialRail.css";
 
 export default function SocialRail() {
   const copyUsername = (item) => {
-    globalThis.navigator.clipboard.writeText(item.username);
+    globalThis.navigator?.clipboard?.writeText(item.username);
   };
 
   return (
@@ -12,7 +12,7 @@ export default function SocialRail() {
 
       <div className="social-icons">
         {SOCIAL_ITEMS.map((item) =>
-          item.action === "copy" ? (
+          item.username ? (
             <button
               key={item.key}
               type="button"

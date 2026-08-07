@@ -1,63 +1,131 @@
-﻿import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./Home.css";
 import ProfileHero from "../components/ProfileHero/ProfileHero";
-import SectionCard from "../components/SectionCard/SectionCard";
-
-const randomImages = [
-  "https://picsum.photos/seed/andres-a/1200/700",
-  "https://picsum.photos/seed/andres-b/1200/700",
-  "https://picsum.photos/seed/andres-c/1200/700",
-  "https://picsum.photos/seed/andres-d/1200/700",
-  "https://picsum.photos/seed/andres-e/1200/700"
-];
+import { LoadingBar } from "../components/terminal/LoadingBar";
+import { TerminalCard } from "../components/terminal/TerminalCard";
+import { TerminalCommand } from "../components/terminal/TerminalCommand";
+import { TerminalShell } from "../components/terminal/TerminalShell";
+import { getHomeGalleryHighlights } from "../data/gallery";
+import { homeContent } from "../data/homeContent";
+import { getSupportedLanguage } from "../data/language";
 
 export default function Home() {
-  const { t } = useTranslation();
-  const [imageIndex, setImageIndex] = useState(0);
+  const { i18n } = useTranslation();
+  const language = getSupportedLanguage(i18n.language);
+  const content = homeContent[language];
+  const photoRoll = getHomeGalleryHighlights(language);
+  const [visibleLines, setVisibleLines] = useState(0);
+  const [isReady, setIsReady] = useState(false);
+  const [activePhotoIndex, setActivePhotoIndex] = useState(0);
+  const profileLines = useMemo(
+    () => Object.entries(content.profile).map(([key, value]) => `${key}: ${value}`),
+    [content.profile]
+  );
+  const activePhoto = photoRoll[activePhotoIndex] ?? photoRoll[0];
 
   useEffect(() => {
-    const timer = window.setInterval(() => {
-      setImageIndex((prev) => (prev + 1) % randomImages.length);
-    }, 2500);
+    setVisibleLines(0);
+    setIsReady(false);
+    setActivePhotoIndex(0);
+  }, [language]);
 
-    return () => window.clearInterval(timer);
-  }, []);
+  useEffect(() => {
+    if (!isReady || photoRoll.length <= 1) {
+      return undefined;
+    }
+
+    const sweepTimer = globalThis.setInterval(() => {
+      setActivePhotoIndex((currentIndex) => (currentIndex + 1) % photoRoll.length);
+    }, 3000);
+
+    return () => globalThis.clearInterval(sweepTimer);
+  }, [isReady, photoRoll.length]);
+
+  useEffect(() => {
+    if (visibleLines >= content.bootLines.length) {
+      const readyTimer = globalThis.setTimeout(() => setIsReady(true), 550);
+
+      return () => globalThis.clearTimeout(readyTimer);
+    }
+
+    const lineTimer = globalThis.setTimeout(() => {
+      setVisibleLines((currentLines) => currentLines + 1);
+    }, content.bootLines[visibleLines]?.delay ?? 260);
+
+    return () => globalThis.clearTimeout(lineTimer);
+  }, [content.bootLines, visibleLines]);
 
   return (
-    <div className="home">
-      <ProfileHero />
+    <TerminalShell className="home">
+      <TerminalCard className="home__boot-card">
+        <TerminalCommand typing>$ boot scarface.service</TerminalCommand>
+        <pre>{content.bootLines.slice(0, visibleLines).map((line) => line.text).join("\n")}</pre>
+        {!isReady && <p className="home__loading">{content.loading}</p>}
+        {isReady && (
+          <div className="home__boot-summary">
+            <LoadingBar label="Profile" value={100} />
+            <LoadingBar label="Curiosity" value={100} />
+            <LoadingBar label="Runtime" value={90} />
+          </div>
+        )}
+      </TerminalCard>
 
-      <SectionCard label={t("home.profileLabel")} title={t("home.profileTitle")} className="home__box home__box--profile">
-        {t("home.description1")}
-      </SectionCard>
+      {isReady && (
+        <div className="home__loaded-content">
+          <ProfileHero />
 
-      <SectionCard label={t("home.galleryLabel")} title={t("home.galleryTitle")} className="home__box home__box--gallery">
-        <div
-          className="home__gallery-preview"
-          style={{ backgroundImage: `url(${randomImages[imageIndex]})` }}
-        />
-      </SectionCard>
+          <section className="home__terminal-grid">
+            <TerminalCard>
+              <pre>{profileLines.join("\n")}</pre>
+            </TerminalCard>
 
-      <SectionCard label={t("home.readmeLabel")} title={t("home.readmeTitle")} className="home__box home__box--readme">
-        {t("home.description2")}
-      </SectionCard>
+            <TerminalCard>
+              <TerminalCommand>$ now_playing</TerminalCommand>
+              <pre>{content.nowPlaying.join("\n")}</pre>
+            </TerminalCard>
+          </section>
 
-      <SectionCard
-        label={t("home.musicLabel")}
-        title={t("home.musicTitle")}
-        className="home__box home__box--song"
-      >
-        <a
-          href="https://open.spotify.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="home__song-link"
-        >
-          {t("home.songLink")}
-        </a>
-      </SectionCard>
-    </div>
+          <TerminalCard>
+            <TerminalCommand>$ system_load</TerminalCommand>
+            <div className="home__bars">
+              {content.bars.map((bar) => (
+                <LoadingBar key={bar.label} label={bar.label} value={bar.value} />
+              ))}
+            </div>
+          </TerminalCard>
+
+          <TerminalCard className="home__photo-roll-card">
+            <TerminalCommand>$ mount photo_roll</TerminalCommand>
+            <p>{content.photoRollIntro}</p>
+            {activePhoto && (
+              <div className="home__photo-sweep" aria-live="polite">
+                <div className="home__photo-sweep-frame" key={activePhoto.id}>
+                  <img src={activePhoto.src} alt={activePhoto.title} loading="lazy" decoding="async" />
+                  <div className="home__photo-sweep-shine" />
+                  <figcaption>
+                    <span>{activePhoto.id}</span>
+                    <strong>{activePhoto.title}</strong>
+                    <small>{activePhoto.mood}</small>
+                  </figcaption>
+                </div>
+
+                <div className="home__photo-sweep-dots" aria-label="photo_roll status">
+                  {photoRoll.map((photo, index) => (
+                    <button
+                      key={photo.id}
+                      type="button"
+                      className={index === activePhotoIndex ? "is-active" : ""}
+                      aria-label={`show ${photo.title}`}
+                      onClick={() => setActivePhotoIndex(index)}
+                    />
+                  ))}
+                </div>
+              </div>
+            )}
+          </TerminalCard>
+        </div>
+      )}
+    </TerminalShell>
   );
 }
-

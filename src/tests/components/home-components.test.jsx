@@ -14,6 +14,45 @@ vi.mock("../../assets/Profile_Car.png", () => ({ default: "car.png" }));
 vi.mock("../../assets/instagram_line_black.png", () => ({ default: "instagram.png" }));
 vi.mock("../../assets/twitch.png", () => ({ default: "twitch.png" }));
 vi.mock("../../assets/discord_line_black.png", () => ({ default: "discord.png" }));
+vi.mock("../../assets/gallery/personal-red-car.jpg", () => ({ default: "personal-red-car.jpg" }));
+vi.mock("../../assets/gallery/places-agave.jpg", () => ({ default: "places-agave.jpg" }));
+vi.mock("../../assets/gallery/places-forest.jpg", () => ({ default: "places-forest.jpg" }));
+vi.mock("../../assets/gallery/places-tequila.jpg", () => ({ default: "places-tequila.jpg" }));
+vi.mock("../../assets/gallery/places-torii.jpg", () => ({ default: "places-torii.jpg" }));
+vi.mock("../../assets/gallery/sunset-ember.jpg", () => ({ default: "sunset-ember.jpg" }));
+vi.mock("../../assets/gallery/sunset-reforma.jpg", () => ({ default: "sunset-reforma.jpg" }));
+vi.mock("../../assets/gallery/sunset-rooftop.jpg", () => ({ default: "sunset-rooftop.jpg" }));
+vi.mock("../../assets/gallery/ibiza-bebe-hidden-road.jpg", () => ({ default: "ibiza-bebe-hidden-road.jpg" }));
+vi.mock("../../assets/gallery/ibiza-maniaca-low-angle.jpg", () => ({ default: "ibiza-maniaca-low-angle.jpg" }));
+vi.mock("../../assets/gallery/nature-aloe.jpg", () => ({ default: "nature-aloe.jpg" }));
+vi.mock("../../assets/gallery/nature-red-flower.jpg", () => ({ default: "nature-red-flower.jpg" }));
+vi.mock("../../assets/gallery/nature-red-tree.jpg", () => ({ default: "nature-red-tree.jpg" }));
+vi.mock("../../assets/gallery/places-cathedral.jpg", () => ({ default: "places-cathedral.jpg" }));
+vi.mock("../../assets/gallery/places-reflection-pond.jpg", () => ({ default: "places-reflection-pond.jpg" }));
+vi.mock("../../assets/gallery/places-tequila-sign.jpg", () => ({ default: "places-tequila-sign.jpg" }));
+vi.mock("../../assets/gallery/sunset-cloud-ribbon.jpg", () => ({ default: "sunset-cloud-ribbon.jpg" }));
+vi.mock("../../assets/gallery/sunset-orange-window.jpg", () => ({ default: "sunset-orange-window.jpg" }));
+vi.mock("../../assets/gallery/sunset-storm-sun.jpg", () => ({ default: "sunset-storm-sun.jpg" }));
+vi.mock("../../assets/gallery/concert-babymetal-arena-lasers.jpg", () => ({ default: "concert-babymetal-arena-lasers.jpg" }));
+vi.mock("../../assets/gallery/concert-babymetal-dark-red.jpg", () => ({ default: "concert-babymetal-dark-red.jpg" }));
+vi.mock("../../assets/gallery/concert-babymetal-light-beam.jpg", () => ({ default: "concert-babymetal-light-beam.jpg" }));
+vi.mock("../../assets/gallery/concert-babymetal-red-arena.jpg", () => ({ default: "concert-babymetal-red-arena.jpg" }));
+vi.mock("../../assets/gallery/concert-epica-blue-arena.jpg", () => ({ default: "concert-epica-blue-arena.jpg" }));
+vi.mock("../../assets/gallery/concert-epica-purple-stage.jpg", () => ({ default: "concert-epica-purple-stage.jpg" }));
+vi.mock("../../assets/gallery/concert-epica-red-smoke.jpg", () => ({ default: "concert-epica-red-smoke.jpg" }));
+vi.mock("../../assets/gallery/concert-epica-red-wide.jpg", () => ({ default: "concert-epica-red-wide.jpg" }));
+vi.mock("../../assets/gallery/concert-epica-symphonic-wide.jpg", () => ({ default: "concert-epica-symphonic-wide.jpg" }));
+vi.mock("../../assets/gallery/concert-megadeth-lights-wide.jpg", () => ({ default: "concert-megadeth-lights-wide.jpg" }));
+vi.mock("../../assets/gallery/concert-megadeth-red-wide.jpg", () => ({ default: "concert-megadeth-red-wide.jpg" }));
+vi.mock("../../assets/gallery/concert-metallica-crowd-rig.jpg", () => ({ default: "concert-metallica-crowd-rig.jpg" }));
+vi.mock("../../assets/gallery/concert-metallica-poster.jpg", () => ({ default: "concert-metallica-poster.jpg" }));
+vi.mock("../../assets/gallery/concert-metallica-red-stage.jpg", () => ({ default: "concert-metallica-red-stage.jpg" }));
+vi.mock("../../assets/gallery/concert-metallica-stadium-open.jpg", () => ({ default: "concert-metallica-stadium-open.jpg" }));
+vi.mock("../../assets/gallery/concert-metallica-tower.jpg", () => ({ default: "concert-metallica-tower.jpg" }));
+vi.mock("../../assets/gallery/concert-slipknot-blue-mask.jpg", () => ({ default: "concert-slipknot-blue-mask.jpg" }));
+vi.mock("../../assets/gallery/concert-slipknot-blue-wide.jpg", () => ({ default: "concert-slipknot-blue-wide.jpg" }));
+vi.mock("../../assets/gallery/concert-slipknot-red-stage.jpg", () => ({ default: "concert-slipknot-red-stage.jpg" }));
+vi.mock("../../assets/gallery/concert-slipknot-red-wall.jpg", () => ({ default: "concert-slipknot-red-wall.jpg" }));
 
 const render = (node) => {
   const container = document.createElement("div");
@@ -27,38 +66,36 @@ const render = (node) => {
   return { container, root };
 };
 
+const finishHomeLoading = async () => {
+  for (let timerCount = 0; timerCount < 16; timerCount += 1) {
+    await act(async () => {
+      vi.runOnlyPendingTimers();
+    });
+  }
+};
+
 describe("Home and component rendering", () => {
-  it("renders home cards", () => {
+  it("renders terminal home modules", async () => {
+    vi.useFakeTimers();
     const { container } = render(<Home />);
 
-    const cards = container.querySelectorAll(".home > *");
-    expect(cards.length).toBe(5);
-    expect(cards[1].textContent).toContain("Scarface_666");
-    expect(cards[2].textContent).toContain("Rollo de fotos");
-    expect(cards[3].textContent).toContain("Hola, Soy Andres Pantoja");
+    expect(container.textContent).toContain("$ boot scarface.service");
+    expect(container.textContent).not.toContain("name: Andrez");
+    await finishHomeLoading();
+
+    expect(container.textContent).toContain("$ boot scarface.service");
+    expect(container.textContent).toContain("name: Andrez");
+    expect(container.textContent).toContain("music_of_the_week");
+    vi.useRealTimers();
   });
 
-  it("updates random gallery image over time and cleans interval", () => {
+  it("renders home loading bars", async () => {
     vi.useFakeTimers();
-    const clearSpy = vi.spyOn(globalThis, "clearInterval");
+    const { container } = render(<Home />);
+    await finishHomeLoading();
 
-    const { container, root } = render(<Home />);
-    const gallery = container.querySelector(".home__gallery-preview");
-    const initial = gallery?.getAttribute("style");
-
-    act(() => {
-      vi.advanceTimersByTime(2600);
-    });
-
-    const updated = gallery?.getAttribute("style");
-    expect(updated).not.toBe(initial);
-
-    act(() => {
-      root.unmount();
-    });
-
-    expect(clearSpy).toHaveBeenCalled();
-    clearSpy.mockRestore();
+    expect(container.textContent).toContain("Curiosity:");
+    expect(container.querySelectorAll(".loading-bar").length).toBe(6);
     vi.useRealTimers();
   });
 
@@ -184,7 +221,7 @@ describe("Home and component rendering", () => {
 
     const img = container.querySelector("img");
     expect(img).toBeTruthy();
-    expect(img?.getAttribute("alt")).toBe("Foto de presentacion");
+    expect(img?.getAttribute("alt")).toBe("Ibiza Maniaca red profile");
   });
 
   it("renders SectionCard with and without className", () => {
@@ -205,3 +242,6 @@ describe("Home and component rendering", () => {
     expect(withoutClass.container.querySelector(".section-card")?.textContent).toContain("Otro titulo");
   });
 });
+
+
+

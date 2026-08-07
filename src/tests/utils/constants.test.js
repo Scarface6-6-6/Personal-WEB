@@ -16,7 +16,7 @@ describe("constants", () => {
   it("has expected social structure", () => {
     expect(SOCIAL_ITEMS).toHaveLength(3);
     expect(SOCIAL_ITEMS.find((item) => item.key === "discord")).toMatchObject({
-      action: "copy",
+      action: "Copy",
       username: "scarface.666"
     });
     expect(SOCIAL_ITEMS.find((item) => item.key === "instagram")?.url).toBe(

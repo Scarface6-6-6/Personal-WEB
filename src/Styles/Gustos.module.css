@@ -1,174 +1,51 @@
-.likesPage {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 3rem 1.5rem;
+.moduleTrigger {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  text-align: left;
 }
 
-.interestsHeader {
-  margin-bottom: 2rem;
-  padding: 1.5rem;
-  border: 1px solid rgba(160, 100, 255, 0.35);
-  border-radius: 16px;
-  background: rgba(20, 15, 40, 0.65);
-}
-
-.terminalCommand,
-.sceneCommand {
-  margin: 0 0 1rem;
-  color: #b478ff;
-  font-family: "JetBrains Mono", monospace;
-}
-
-.terminalOutput {
-  color: #d8c7ff;
-  font-family: "JetBrains Mono", monospace;
-  line-height: 1.7;
-}
-
-.terminalOutput p {
-  margin: 0;
-}
-
-.terminalLine {
-  animation: terminalLineIn 220ms ease-out both;
-}
-
-.terminalCursor {
-  color: #b478ff;
+.loadingHint {
+  margin: 0.75rem 0 0;
+  color: var(--purple);
+  font-family: "Courier New", monospace;
   animation: terminalPulse 900ms ease-in-out infinite;
 }
 
-.interestsGrid {
+.moduleBody {
   display: grid;
-  gap: 1.5rem;
+  gap: 1rem;
+  margin: 1rem 0;
 }
 
-.interestsGridReady {
-  animation: modulesReveal 420ms ease-out both;
-}
-
-.interestModule {
-  padding: 1.5rem;
-  border: 1px solid rgba(160, 100, 255, 0.35);
-  border-radius: 18px;
-  background:
-    linear-gradient(135deg, rgba(40, 25, 75, 0.75), rgba(10, 10, 25, 0.92));
-  box-shadow: 0 0 25px rgba(130, 80, 255, 0.1);
-}
-
-.interestModule h3 {
-  margin: 0 0 0.75rem;
-  color: #ffffff;
-  font-size: 1.8rem;
-}
-
-.moduleDescription {
-  margin: 0 0 1.5rem;
-  color: #c8bddb;
-  line-height: 1.7;
-}
-
-.moduleSections {
-  display: grid;
-  gap: 1.25rem;
-}
-
-.interestSection h4 {
+.moduleBody h4 {
   margin: 0 0 0.5rem;
-  color: #ffffff;
+  color: var(--text);
 }
 
-.interestSection ul {
+.moduleBody ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.interestSection li {
-  padding: 0.25rem 0;
-  color: #d8d2e7;
+.moduleBody li {
+  padding: 0.2rem 0;
+  color: var(--muted);
 }
 
-.interestSection li::before {
+.moduleBody li::before {
   content: "- ";
-  color: #b478ff;
+  color: var(--purple);
 }
 
 .sceneBlock {
-  margin-top: 1.75rem;
   padding: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 14px;
+  border-radius: 8px;
   background: rgba(5, 5, 15, 0.65);
-}
-
-.sceneBlock h4 {
-  margin: 0;
-  color: #ffffff;
-}
-
-.sceneGrid {
-  display: grid;
-  gap: 0.5rem;
-  margin-top: 0.75rem;
-}
-
-.sceneRow {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.9rem;
-}
-
-.sceneRow span {
-  color: #9f95b8;
-}
-
-.sceneRow strong {
-  color: #ffffff;
-  text-align: right;
-}
-
-.moduleStatus {
-  margin-top: 1.5rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
-  color: #c8bddb;
-  font-family: "JetBrains Mono", monospace;
-}
-
-.moduleStatus strong {
-  margin-left: 0.5rem;
-  color: #ffffff;
-}
-
-@media (max-width: 860px) {
-  .likesPage {
-    padding: 2rem 1rem;
-  }
-
-  .interestsGrid {
-    gap: 0.5rem;
-  }
-}
-
-@media (min-width: 900px) {
-  .interestsGrid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@keyframes terminalLineIn {
-  from {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 @keyframes terminalPulse {
@@ -179,17 +56,5 @@
 
   50% {
     opacity: 1;
-  }
-}
-
-@keyframes modulesReveal {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
