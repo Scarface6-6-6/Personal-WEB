@@ -5,12 +5,14 @@ import Galeria from "./pages/Galeria";
 import Gustos from "./pages/Gustos";
 import Home from "./pages/Home";
 import Now from "./pages/Now";
+import RenataInvite from "./pages/RenataInvite";
 import Redes from "./pages/redes";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+        <Route path="/renata" element={<RenataInvite />} />
         <Route element={<AppLayout />}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
