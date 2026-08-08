@@ -20,10 +20,11 @@ export default function TopBar({ isHome, menuOpen, onMenuEnter, onMenuLeave, onM
           </Link>
         )}
 
-        <div className="topbar__lang" aria-label="language-switcher">
+        <div className="topbar__lang" role="group" aria-label="language-switcher">
           <button
             type="button"
             className={i18n.language === "es" ? "topbar__lang-active" : "topbar__lang-btn"}
+            aria-pressed={i18n.language === "es"}
             onClick={() => setLanguage("es")}
           >
             {t("language.es")}
@@ -31,6 +32,7 @@ export default function TopBar({ isHome, menuOpen, onMenuEnter, onMenuLeave, onM
           <button
             type="button"
             className={i18n.language === "en" ? "topbar__lang-active" : "topbar__lang-btn"}
+            aria-pressed={i18n.language === "en"}
             onClick={() => setLanguage("en")}
           >
             {t("language.en")}
@@ -46,6 +48,8 @@ export default function TopBar({ isHome, menuOpen, onMenuEnter, onMenuLeave, onM
         type="button"
         className={`topbar__menu ${menuOpen ? "topbar__menu--open" : ""}`}
         aria-label="toggle menu"
+        aria-controls="main-menu"
+        aria-expanded={menuOpen}
         onMouseEnter={onMenuEnter}
         onMouseLeave={onMenuLeave}
         onClick={onMenuToggle}

@@ -1,14 +1,32 @@
-﻿import { useTranslation } from "react-i18next";
+import { useTranslation } from "react-i18next";
+import { getCurrentStatus, statusBars } from "../data/currentStatus";
+import { LoadingBar } from "../components/terminal/LoadingBar";
+import { TerminalCard } from "../components/terminal/TerminalCard";
+import { TerminalCommand } from "../components/terminal/TerminalCommand";
+import { TerminalShell } from "../components/terminal/TerminalShell";
 
 export default function Now() {
-  const { t } = useTranslation();
+  const { i18n } = useTranslation();
+  const currentStatus = getCurrentStatus(i18n.language);
 
   return (
-    <div className="screen active">
-      <div className="eyebrow">{t("now.eyebrow")}</div>
-      <h2>{t("now.title")}</h2>
-      <h3>{t("now.subtitle")}</h3>
-    </div>
+    <TerminalShell>
+      <TerminalCommand typing>$ current_status</TerminalCommand>
+
+      <section className="terminal-grid">
+        {Object.entries(currentStatus).map(([key, items]) => (
+          <TerminalCard key={key}>
+            <h3>{key}</h3>
+            <pre>{items.map((item) => `- ${item}`).join("\n")}</pre>
+          </TerminalCard>
+        ))}
+      </section>
+
+      <TerminalCard>
+        {statusBars.map((bar) => (
+          <LoadingBar key={bar.label} label={bar.label} value={bar.value} />
+        ))}
+      </TerminalCard>
+    </TerminalShell>
   );
 }
-

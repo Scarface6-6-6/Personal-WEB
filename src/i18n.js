@@ -10,8 +10,8 @@ await i18n.use(initReactI18next).init({
     es: { translation: es },
     en: { translation: en }
   },
-  lng: savedLanguage || "es",
-  fallbackLng: "es",
+  lng: savedLanguage || "en",
+  fallbackLng: "en",
   interpolation: {
     escapeValue: false
   }

@@ -24,7 +24,15 @@ const renderAt = (path) => {
 };
 
 const finishInterestLoading = async () => {
-  for (let timerCount = 0; timerCount < 8; timerCount += 1) {
+  for (let timerCount = 0; timerCount < 10; timerCount += 1) {
+    await act(async () => {
+      vi.runOnlyPendingTimers();
+    });
+  }
+};
+
+const finishHomeLoading = async () => {
+  for (let timerCount = 0; timerCount < 16; timerCount += 1) {
     await act(async () => {
       vi.runOnlyPendingTimers();
     });
@@ -32,12 +40,15 @@ const finishInterestLoading = async () => {
 };
 
 describe("App routes", () => {
-  it("renders Home route with shell", () => {
+  it("renders Home route with shell", async () => {
+    vi.useFakeTimers();
     const container = renderAt("/");
+    await finishHomeLoading();
 
     expect(container.textContent).toContain("Scarface_666");
-    expect(container.textContent).toContain("Rollo de fotos");
-    expect(container.textContent).toContain("Apartado de Cancion de la Semana");
+    expect(container.textContent).toContain("$ boot scarface.service");
+    expect(container.textContent).toContain("music_of_the_week");
+    vi.useRealTimers();
   });
 
   it("renders About route", () => {
@@ -64,7 +75,7 @@ describe("App routes", () => {
     expect(gustos.textContent).toContain("Music");
     expect(likes.textContent).toContain("$ load interests");
     expect(likes.textContent).toContain("System ready.");
-    expect(likes.textContent).toContain("Food");
+    expect(likes.textContent).toContain("food.module");
     vi.useRealTimers();
   });
 
@@ -72,29 +83,37 @@ describe("App routes", () => {
     const galeria = renderAt("/galeria");
     const gallery = renderAt("/gallery");
 
-    expect(galeria.textContent).toContain("Mis Fotos");
-    expect(gallery.textContent).toContain("Mis Fotos");
+    expect(galeria.textContent).toContain("$ open gallery");
+    expect(galeria.textContent).toContain("best_moments");
+    expect(gallery.textContent).toContain("$ open gallery");
   });
 
   it("renders Links route aliases", () => {
     const redes = renderAt("/redes");
     const links = renderAt("/links");
 
-    expect(redes.textContent).toContain("Mis Redes");
-    expect(links.textContent).toContain("Mis Redes");
+    expect(redes.textContent).toContain("$ establish_connection");
+    expect(redes.textContent).toContain("scarface.666");
+    expect(links.textContent).toContain("$ establish_connection");
+    expect(links.textContent).toContain("scarface.666");
   });
 
   it("renders Now route", () => {
     const container = renderAt("/now");
 
-    expect(container.textContent).toContain("Que estoy haciendo");
+    expect(container.textContent).toContain("$ current_status");
+    expect(container.textContent).toContain("building");
   });
 
-  it("redirects Renata route to home", () => {
+  it("does not render Renata route in the app", () => {
     const container = renderAt("/renata");
 
-    expect(container.textContent).toContain("Scarface_666");
-    expect(window.location.pathname).toBe("/");
+    expect(container.textContent).not.toContain("Scarface_666");
+    expect(container.textContent).not.toContain("Hola, Ollin.");
+    expect(window.location.pathname).toBe("/renata");
   });
 });
+
+
+
 

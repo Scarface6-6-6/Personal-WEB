@@ -10,8 +10,8 @@
 }
 
 .section-card {
-  padding: 36px;
-  min-height: 900px;
+  padding: clamp(1.25rem, 4vw, 2.25rem);
+  min-height: 500px;
 }
 
 .label {
@@ -29,11 +29,11 @@
 .section-body {
   color: var(--muted);
   line-height: 1.7;
-  font-size: 1.02rem;
+  font-size: clamp(0.98rem, 2vw, 1.02rem);
 }
 
-@media (max-width: 1200px) {
+@media (min-width: 1024px) {
   .section-card {
-    min-height: 500px;
+    min-height: 900px;
   }
 }

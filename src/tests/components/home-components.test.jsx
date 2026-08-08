@@ -27,38 +27,36 @@ const render = (node) => {
   return { container, root };
 };
 
+const finishHomeLoading = async () => {
+  for (let timerCount = 0; timerCount < 16; timerCount += 1) {
+    await act(async () => {
+      vi.runOnlyPendingTimers();
+    });
+  }
+};
+
 describe("Home and component rendering", () => {
-  it("renders home cards", () => {
+  it("renders terminal home modules", async () => {
+    vi.useFakeTimers();
     const { container } = render(<Home />);
 
-    const cards = container.querySelectorAll(".home > *");
-    expect(cards.length).toBe(5);
-    expect(cards[1].textContent).toContain("Scarface_666");
-    expect(cards[2].textContent).toContain("Rollo de fotos");
-    expect(cards[3].textContent).toContain("Hola, Soy Andres Pantoja");
+    expect(container.textContent).toContain("$ boot scarface.service");
+    expect(container.textContent).not.toContain("name: Andrez");
+    await finishHomeLoading();
+
+    expect(container.textContent).toContain("$ boot scarface.service");
+    expect(container.textContent).toContain("name: Andrez");
+    expect(container.textContent).toContain("music_of_the_week");
+    vi.useRealTimers();
   });
 
-  it("updates random gallery image over time and cleans interval", () => {
+  it("renders home loading bars", async () => {
     vi.useFakeTimers();
-    const clearSpy = vi.spyOn(globalThis, "clearInterval");
+    const { container } = render(<Home />);
+    await finishHomeLoading();
 
-    const { container, root } = render(<Home />);
-    const gallery = container.querySelector(".home__gallery-preview");
-    const initial = gallery?.getAttribute("style");
-
-    act(() => {
-      vi.advanceTimersByTime(2600);
-    });
-
-    const updated = gallery?.getAttribute("style");
-    expect(updated).not.toBe(initial);
-
-    act(() => {
-      root.unmount();
-    });
-
-    expect(clearSpy).toHaveBeenCalled();
-    clearSpy.mockRestore();
+    expect(container.textContent).toContain("Curiosity:");
+    expect(container.querySelectorAll(".loading-bar").length).toBe(6);
     vi.useRealTimers();
   });
 
@@ -102,7 +100,8 @@ describe("Home and component rendering", () => {
   it("renders SocialRail links", () => {
     const { container } = render(<SocialRail />);
 
-    expect(container.querySelectorAll("a").length).toBe(3);
+    expect(container.querySelectorAll("a").length).toBe(2);
+    expect(container.querySelectorAll("button").length).toBe(1);
   });
 
   it("renders RightMenu without close button", () => {
@@ -183,7 +182,7 @@ describe("Home and component rendering", () => {
 
     const img = container.querySelector("img");
     expect(img).toBeTruthy();
-    expect(img?.getAttribute("alt")).toBe("Foto de presentacion");
+    expect(img?.getAttribute("alt")).toBe("Ibiza Maniaca red profile");
   });
 
   it("renders SectionCard with and without className", () => {
@@ -204,3 +203,6 @@ describe("Home and component rendering", () => {
     expect(withoutClass.container.querySelector(".section-card")?.textContent).toContain("Otro titulo");
   });
 });
+
+
+

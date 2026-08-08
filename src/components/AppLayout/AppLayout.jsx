@@ -1,4 +1,4 @@
-﻿import { useCallback, useEffect, useRef, useState } from "react";
+﻿import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Outlet, useLocation } from "react-router-dom";
 import TopBar from "../TopBar/TopBar";
 import SocialRail from "../SocialRail/SocialRail";
@@ -42,6 +42,14 @@ export default function AppLayout() {
     }
   }, [isHome, location.pathname]);
 
+  useLayoutEffect(() => {
+    resetScrollPosition(document.scrollingElement);
+    resetScrollPosition(document.documentElement);
+    resetScrollPosition(document.body);
+    resetScrollPosition(document.querySelector(".secondary-layout"));
+    resetScrollPosition(document.querySelector(".home__layout"));
+  }, [location.pathname]);
+
   useEffect(() => {
     return () => {
       clearCloseTimeout();
@@ -77,3 +85,13 @@ export default function AppLayout() {
     </div>
   );
 }
+
+function resetScrollPosition(element) {
+  if (!element) {
+    return;
+  }
+
+  element.scrollTop = 0;
+  element.scrollLeft = 0;
+}
+

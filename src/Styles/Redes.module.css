@@ -1,42 +1,22 @@
-.redesGrid {
+﻿.redesGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: 1fr;
   gap: 1rem;
-  margin-top: 2rem;
 }
 
-.redesCard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1.5rem;
-  border: 1px solid rgba(244, 240, 232, 0.12);
-  border-radius: 8px;
-  background: rgba(244, 240, 232, 0.03);
-  color: inherit;
-  text-decoration: none;
-  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
-}
-
-.redesCard:hover {
-  border-color: rgba(155, 110, 232, 0.42);
-  background: rgba(244, 240, 232, 0.06);
-  transform: translateY(-2px);
-}
-
-.redesCard img {
+.redesIcon {
   width: 2rem;
   height: 2rem;
+  margin-bottom: 0.75rem;
+  object-fit: contain;
 }
 
-.redesCard span {
-  font-size: 0.9rem;
-  font-weight: 600;
+.redesActions {
+  margin-top: 1rem;
 }
 
-@media (max-width: 860px) {
+@media (min-width: 768px) {
   .redesGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
   }
 }
