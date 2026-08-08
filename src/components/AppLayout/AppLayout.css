@@ -1,16 +1,16 @@
 ﻿.app-shell {
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .secondary-layout {
-  padding: 110px 48px 40px;
+  min-height: 100dvh;
+  padding: clamp(92px, 18vw, 104px) 1rem 1.5rem;
   display: flex;
   justify-content: center;
 }
 
-@media (max-width: 1200px) {
+@media (min-width: 1024px) {
   .secondary-layout {
-    padding: 100px 16px 24px;
+    padding: 110px 48px 40px;
   }
 }
-

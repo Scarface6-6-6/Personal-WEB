@@ -1,9 +1,9 @@
-.home {
+﻿.home {
   gap: 2rem;
 }
 
 .home__boot-card {
-  min-height: 430px;
+  min-height: clamp(430px, 72dvh, 520px);
   display: grid;
   align-content: start;
 }
@@ -27,7 +27,7 @@
 
 .home__terminal-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 1rem;
 }
 
@@ -74,7 +74,8 @@
 
 .home__photo-sweep-frame {
   position: relative;
-  min-height: clamp(420px, 52vw, 720px);
+  margin: 0;
+  min-height: 380px;
   overflow: hidden;
   border: 1px solid rgba(164, 97, 255, 0.28);
   border-radius: 32px;
@@ -96,7 +97,7 @@
 
 .home__photo-sweep-frame img {
   width: 100%;
-  height: clamp(420px, 52vw, 720px);
+  height: 380px;
   display: block;
   object-fit: cover;
   object-position: center;
@@ -151,27 +152,47 @@
 }
 
 .home__photo-sweep-dots button {
-  width: 42px;
-  height: 4px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-width: 44px;
+  min-height: 44px;
+  width: 44px;
   border: 0;
   border-radius: 999px;
-  background: rgba(164, 97, 255, 0.24);
+  background: transparent;
   cursor: pointer;
-  transition: width 220ms ease, background 220ms ease, box-shadow 220ms ease;
+  transition: transform 220ms ease;
+}
+
+.home__photo-sweep-dots button::before {
+  content: "";
+  width: 100%;
+  height: 4px;
+  border-radius: inherit;
+  background: rgba(164, 97, 255, 0.24);
+  transition: background 220ms ease, box-shadow 220ms ease;
 }
 
 .home__photo-sweep-dots button:hover,
+.home__photo-sweep-dots button:focus-visible,
 .home__photo-sweep-dots .is-active {
   width: 64px;
+}
+
+.home__photo-sweep-dots button:hover::before,
+.home__photo-sweep-dots button:focus-visible::before,
+.home__photo-sweep-dots .is-active::before {
   background: var(--purple);
   box-shadow: 0 0 18px rgba(164, 97, 255, 0.5);
 }
 
 .home__layout {
   display: grid;
-  grid-template-columns: 90px minmax(700px, 1fr) 360px;
+  grid-template-columns: minmax(0, 1fr);
   gap: 24px;
-  padding: 110px 48px 40px;
+  min-height: 100dvh;
+  padding: clamp(92px, 18vw, 104px) 1rem 1.5rem;
 }
 
 .home__content {
@@ -185,22 +206,7 @@
   width: 100%;
 }
 
-@media (max-width: 1200px) {
-  .home__layout {
-    grid-template-columns: 1fr;
-    padding: 100px 16px 24px;
-  }
-}
-
-@media (max-width: 860px) {
-  .home__terminal-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .home__boot-card {
-    min-height: 500px;
-  }
-
+@media (min-width: 480px) {
   .home__photo-sweep-frame,
   .home__photo-sweep-frame img {
     min-height: 460px;
@@ -208,15 +214,24 @@
   }
 }
 
-@media (max-width: 520px) {
+@media (min-width: 768px) {
+  .home__terminal-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
   .home__photo-sweep-frame,
   .home__photo-sweep-frame img {
-    min-height: 380px;
-    height: 380px;
+    min-height: clamp(420px, 52vw, 720px);
+    height: clamp(420px, 52vw, 720px);
   }
+}
 
-  .home__photo-sweep-dots button {
-    width: 30px;
+@media (min-width: 1280px) {
+  .home__layout {
+    grid-template-columns: 90px minmax(700px, 1fr) 360px;
+    padding: 110px 48px 40px;
   }
 }
 

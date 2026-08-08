@@ -12,7 +12,9 @@ export default function RightMenu({ open, onHoverStart, onHoverEnd }) {
 
   return (
     <aside
+      id="main-menu"
       className={`right-menu card ${open ? "right-menu--open" : ""}`}
+      aria-label="main navigation"
       onMouseEnter={onHoverStart}
       onMouseLeave={onHoverEnd}
     >

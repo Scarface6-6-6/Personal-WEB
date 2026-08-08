@@ -11,27 +11,27 @@
 .galleryIntro h1 {
   margin: 0;
   color: var(--text);
-  font-size: clamp(2rem, 5vw, 4.8rem);
+  font-size: clamp(2rem, 12vw, 4.8rem);
   letter-spacing: -0.07em;
 }
 
 .galleryIntro p {
   margin: 0;
   color: var(--muted);
-  font-size: clamp(1rem, 2vw, 1.2rem);
+  font-size: clamp(1rem, 3vw, 1.2rem);
   line-height: 1.7;
 }
 
 .galleryStage {
   display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(320px, 0.8fr);
+  grid-template-columns: 1fr;
   gap: 1.2rem;
   align-items: stretch;
 }
 
 .heroFrame {
   position: relative;
-  min-height: 640px;
+  min-height: 420px;
   overflow: hidden;
   border: 1px solid rgba(164, 97, 255, 0.35);
   border-radius: 32px;
@@ -47,16 +47,24 @@
   background: linear-gradient(180deg, transparent 52%, rgba(5, 7, 18, 0.88));
 }
 
+.heroFrame picture,
+.photoModal picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
 .heroFrame img {
   width: 100%;
   height: 100%;
-  min-height: 640px;
+  min-height: 420px;
   display: block;
   object-fit: cover;
   transition: transform 700ms ease, filter 700ms ease;
 }
 
-.heroFrame:hover img {
+.heroFrame:hover img,
+.heroFrame:focus-visible img {
   filter: saturate(1.1) contrast(1.03);
   transform: scale(1.035);
 }
@@ -78,7 +86,7 @@
 .photoModal h3 {
   margin: 0.85rem 0 0.7rem;
   color: var(--text);
-  font-size: clamp(1.8rem, 3vw, 3rem);
+  font-size: clamp(1.8rem, 7vw, 3rem);
   letter-spacing: -0.05em;
 }
 
@@ -89,14 +97,14 @@
 }
 
 .collectionPanel {
-  position: sticky;
-  top: 92px;
+  position: static;
   z-index: 2;
   backdrop-filter: blur(18px);
 }
 
 .collectionHeader {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
@@ -112,6 +120,7 @@
 }
 
 .categoryRail button {
+  min-height: 44px;
   border: 1px solid rgba(164, 97, 255, 0.32);
   border-radius: 999px;
   padding: 0.72rem 1rem;
@@ -122,6 +131,7 @@
 }
 
 .categoryRail button:hover,
+.categoryRail button:focus-visible,
 .categoryRail .activeCategory {
   color: var(--text);
   border-color: var(--purple);
@@ -130,7 +140,7 @@
 
 .momentGrid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 1rem;
 }
 
@@ -157,35 +167,98 @@
 
 .photoStrip {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: 1fr;
+  gap: 0.85rem;
 }
 
 .photoStrip button {
+  position: relative;
   display: grid;
-  gap: 0.45rem;
-  padding: 0.55rem;
+  min-height: 44px;
+  padding: 0;
+  overflow: hidden;
   border: 1px solid rgba(164, 97, 255, 0.22);
-  border-radius: 20px;
-  background: rgba(7, 8, 20, 0.78);
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(167, 107, 255, 0.08), transparent 70%),
+    rgba(7, 8, 20, 0.82);
   color: var(--muted);
   text-align: left;
   cursor: pointer;
-  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+  isolation: isolate;
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
 }
 
 .photoStrip button:hover,
+.photoStrip button:focus-visible,
 .photoStrip .activePhoto {
   border-color: var(--purple);
   box-shadow: 0 0 28px rgba(164, 97, 255, 0.24);
   transform: translateY(-3px);
 }
 
+.photoStrip button::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 1;
+  height: 48%;
+  pointer-events: none;
+  background: linear-gradient(180deg, transparent, rgba(5, 7, 18, 0.92));
+}
+
+.photoStrip picture {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+
+.momentGrid[data-category="concerts"] .photoStrip picture,
+.momentGrid[data-category="sunsets"] .photoStrip picture {
+  aspect-ratio: 16 / 10;
+}
+
+.momentGrid[data-category="ibiza"] .photoStrip picture,
+.momentGrid[data-category="places"] .photoStrip picture {
+  aspect-ratio: 3 / 2;
+}
+
+.momentGrid[data-category="nature"] .photoStrip picture {
+  aspect-ratio: 1 / 1;
+}
+
 .photoStrip img {
   width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: 14px;
+  height: 100%;
+  display: block;
   object-fit: cover;
+  object-position: center;
+  filter: saturate(0.94) contrast(1.02);
+  transform: scale(1.01);
+  transition: transform 360ms ease, filter 360ms ease;
+}
+
+.photoStrip button:hover img,
+.photoStrip button:focus-visible img,
+.photoStrip .activePhoto img {
+  filter: saturate(1.08) contrast(1.05);
+  transform: scale(1.055);
+}
+
+.photoStrip span {
+  position: absolute;
+  left: 0.8rem;
+  right: 0.8rem;
+  bottom: 0.7rem;
+  z-index: 2;
+  overflow: hidden;
+  color: var(--text);
+  font-size: clamp(0.72rem, 2vw, 0.82rem);
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.78);
+  white-space: nowrap;
 }
 
 .modalBackdrop {
@@ -201,42 +274,61 @@
 
 .photoModal {
   width: min(1040px, 100%);
+  max-height: calc(100dvh - 2rem);
+  overflow-y: auto;
   display: grid;
-  grid-template-columns: minmax(0, 1.25fr) minmax(280px, 0.75fr);
+  grid-template-columns: 1fr;
   gap: 1.2rem;
 }
 
 .photoModal img {
   width: 100%;
-  max-height: 76vh;
+  height: 100%;
+  max-height: 76dvh;
   border-radius: 22px;
   object-fit: cover;
 }
 
-@media (max-width: 1100px) {
-  .galleryStage,
-  .momentGrid,
-  .photoModal {
-    grid-template-columns: 1fr;
+@media (min-width: 480px) {
+  .photoStrip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
 
+@media (min-width: 768px) {
+  .photoStrip picture {
+    aspect-ratio: 16 / 11;
+  }
+}
+
+@media (min-width: 768px) {
   .heroFrame,
   .heroFrame img {
     min-height: 520px;
   }
 }
 
-@media (max-width: 700px) {
+@media (min-width: 1024px) {
+  .galleryStage {
+    grid-template-columns: minmax(0, 1.6fr) minmax(320px, 0.8fr);
+  }
+
+  .momentGrid,
+  .photoModal {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .collectionPanel {
-    position: static;
+    position: sticky;
+    top: 92px;
   }
 
   .heroFrame,
   .heroFrame img {
-    min-height: 420px;
+    min-height: 640px;
   }
 
-  .photoStrip {
-    grid-template-columns: 1fr;
+  .photoStrip picture {
+    aspect-ratio: 4 / 3;
   }
 }

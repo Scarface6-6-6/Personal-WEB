@@ -1,42 +1,42 @@
-﻿import concertBabymetalArenaLasers from "../assets/gallery/concert-babymetal-arena-lasers.jpg";
-import concertBabymetalDarkRed from "../assets/gallery/concert-babymetal-dark-red.jpg";
-import concertBabymetalLightBeam from "../assets/gallery/concert-babymetal-light-beam.jpg";
-import concertBabymetalRedArena from "../assets/gallery/concert-babymetal-red-arena.jpg";
-import concertEpicaBlueArena from "../assets/gallery/concert-epica-blue-arena.jpg";
-import concertEpicaPurpleStage from "../assets/gallery/concert-epica-purple-stage.jpg";
-import concertEpicaRedSmoke from "../assets/gallery/concert-epica-red-smoke.jpg";
-import concertEpicaRedWide from "../assets/gallery/concert-epica-red-wide.jpg";
-import concertEpicaSymphonicWide from "../assets/gallery/concert-epica-symphonic-wide.jpg";
-import concertMegadethLightsWide from "../assets/gallery/concert-megadeth-lights-wide.jpg";
-import concertMegadethRedWide from "../assets/gallery/concert-megadeth-red-wide.jpg";
-import concertMetallicaCrowdRig from "../assets/gallery/concert-metallica-crowd-rig.jpg";
-import concertMetallicaPoster from "../assets/gallery/concert-metallica-poster.jpg";
-import concertMetallicaRedStage from "../assets/gallery/concert-metallica-red-stage.jpg";
-import concertMetallicaStadiumOpen from "../assets/gallery/concert-metallica-stadium-open.jpg";
-import concertMetallicaTower from "../assets/gallery/concert-metallica-tower.jpg";
-import concertSlipknotBlueMask from "../assets/gallery/concert-slipknot-blue-mask.jpg";
-import concertSlipknotBlueWide from "../assets/gallery/concert-slipknot-blue-wide.jpg";
-import concertSlipknotRedStage from "../assets/gallery/concert-slipknot-red-stage.jpg";
-import concertSlipknotRedWall from "../assets/gallery/concert-slipknot-red-wall.jpg";
-import ibizaBebeHiddenRoad from "../assets/gallery/ibiza-bebe-hidden-road.jpg";
-import ibizaManiacaLowAngle from "../assets/gallery/ibiza-maniaca-low-angle.jpg";
-import personalRedCar from "../assets/gallery/personal-red-car.jpg";
-import placesAgave from "../assets/gallery/places-agave.jpg";
-import placesCathedral from "../assets/gallery/places-cathedral.jpg";
-import placesForest from "../assets/gallery/places-forest.jpg";
-import placesReflectionPond from "../assets/gallery/places-reflection-pond.jpg";
-import placesTequila from "../assets/gallery/places-tequila.jpg";
-import placesTequilaSign from "../assets/gallery/places-tequila-sign.jpg";
-import placesTorii from "../assets/gallery/places-torii.jpg";
-import natureAloe from "../assets/gallery/nature-aloe.jpg";
-import natureRedFlower from "../assets/gallery/nature-red-flower.jpg";
-import natureRedTree from "../assets/gallery/nature-red-tree.jpg";
-import sunsetCloudRibbon from "../assets/gallery/sunset-cloud-ribbon.jpg";
-import sunsetEmber from "../assets/gallery/sunset-ember.jpg";
-import sunsetOrangeWindow from "../assets/gallery/sunset-orange-window.jpg";
-import sunsetReforma from "../assets/gallery/sunset-reforma.jpg";
-import sunsetRooftop from "../assets/gallery/sunset-rooftop.jpg";
-import sunsetStormSun from "../assets/gallery/sunset-storm-sun.jpg";
+﻿const concertBabymetalArenaLasers = "/gallery/optimized/concert-babymetal-arena-lasers-900.webp";
+const concertBabymetalDarkRed = "/gallery/optimized/concert-babymetal-dark-red-900.webp";
+const concertBabymetalLightBeam = "/gallery/optimized/concert-babymetal-light-beam-900.webp";
+const concertBabymetalRedArena = "/gallery/optimized/concert-babymetal-red-arena-900.webp";
+const concertEpicaBlueArena = "/gallery/optimized/concert-epica-blue-arena-900.webp";
+const concertEpicaPurpleStage = "/gallery/optimized/concert-epica-purple-stage-900.webp";
+const concertEpicaRedSmoke = "/gallery/optimized/concert-epica-red-smoke-900.webp";
+const concertEpicaRedWide = "/gallery/optimized/concert-epica-red-wide-900.webp";
+const concertEpicaSymphonicWide = "/gallery/optimized/concert-epica-symphonic-wide-900.webp";
+const concertMegadethLightsWide = "/gallery/optimized/concert-megadeth-lights-wide-900.webp";
+const concertMegadethRedWide = "/gallery/optimized/concert-megadeth-red-wide-900.webp";
+const concertMetallicaCrowdRig = "/gallery/optimized/concert-metallica-crowd-rig-900.webp";
+const concertMetallicaPoster = "/gallery/optimized/concert-metallica-poster-900.webp";
+const concertMetallicaRedStage = "/gallery/optimized/concert-metallica-red-stage-900.webp";
+const concertMetallicaStadiumOpen = "/gallery/optimized/concert-metallica-stadium-open-900.webp";
+const concertMetallicaTower = "/gallery/optimized/concert-metallica-tower-900.webp";
+const concertSlipknotBlueMask = "/gallery/optimized/concert-slipknot-blue-mask-900.webp";
+const concertSlipknotBlueWide = "/gallery/optimized/concert-slipknot-blue-wide-900.webp";
+const concertSlipknotRedStage = "/gallery/optimized/concert-slipknot-red-stage-900.webp";
+const concertSlipknotRedWall = "/gallery/optimized/concert-slipknot-red-wall-900.webp";
+const ibizaBebeHiddenRoad = "/gallery/optimized/ibiza-bebe-hidden-road-900.webp";
+const ibizaManiacaLowAngle = "/gallery/optimized/ibiza-maniaca-low-angle-900.webp";
+const personalRedCar = "/gallery/optimized/personal-red-car-900.webp";
+const placesAgave = "/gallery/optimized/places-agave-900.webp";
+const placesCathedral = "/gallery/optimized/places-cathedral-900.webp";
+const placesForest = "/gallery/optimized/places-forest-900.webp";
+const placesReflectionPond = "/gallery/optimized/places-reflection-pond-900.webp";
+const placesTequila = "/gallery/optimized/places-tequila-900.webp";
+const placesTequilaSign = "/gallery/optimized/places-tequila-sign-900.webp";
+const placesTorii = "/gallery/optimized/places-torii-900.webp";
+const natureAloe = "/gallery/optimized/nature-aloe-900.webp";
+const natureRedFlower = "/gallery/optimized/nature-red-flower-900.webp";
+const natureRedTree = "/gallery/optimized/nature-red-tree-900.webp";
+const sunsetCloudRibbon = "/gallery/optimized/sunset-cloud-ribbon-900.webp";
+const sunsetEmber = "/gallery/optimized/sunset-ember-900.webp";
+const sunsetOrangeWindow = "/gallery/optimized/sunset-orange-window-900.webp";
+const sunsetReforma = "/gallery/optimized/sunset-reforma-900.webp";
+const sunsetRooftop = "/gallery/optimized/sunset-rooftop-900.webp";
+const sunsetStormSun = "/gallery/optimized/sunset-storm-sun-900.webp";
 import { getSupportedLanguage } from "./language";
 
 export type GalleryCategory = "ibiza" | "places" | "sunsets" | "nature" | "concerts";
@@ -766,6 +766,7 @@ export function getHomeGalleryHighlights(language?: string) {
 export function getGalleryItems(language?: string) {
   return getGalleryPageContent(language).items;
 }
+
 
 
 

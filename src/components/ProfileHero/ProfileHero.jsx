@@ -1,10 +1,20 @@
 ﻿import "./ProfileHero.css";
-import profileImage from "../../assets/gallery/personal-red-car.jpg";
+import { ResponsiveImage } from "../ResponsiveImage/ResponsiveImage";
+
+const profileImage = "/gallery/optimized/personal-red-car-900.webp";
 
 export default function ProfileHero() {
   return (
     <section className="profile-hero card">
-      <img src={profileImage} alt="Ibiza Maniaca red profile" className="profile-img" />
+      <ResponsiveImage
+        src={profileImage}
+        alt="Ibiza Maniaca red profile"
+        className="profile-img"
+        loading="eager"
+        decoding="async"
+        fetchPriority="high"
+        sizes="(min-width: 1280px) 1370px, 100vw"
+      />
     </section>
   );
 }

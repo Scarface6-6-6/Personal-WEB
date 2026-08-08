@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import "./Home.css";
 import ProfileHero from "../components/ProfileHero/ProfileHero";
+import { ResponsiveImage } from "../components/ResponsiveImage/ResponsiveImage";
 import { LoadingBar } from "../components/terminal/LoadingBar";
 import { TerminalCard } from "../components/terminal/TerminalCard";
 import { TerminalCommand } from "../components/terminal/TerminalCommand";
@@ -100,15 +101,21 @@ export default function Home() {
             <p>{content.photoRollIntro}</p>
             {activePhoto && (
               <div className="home__photo-sweep" aria-live="polite">
-                <div className="home__photo-sweep-frame" key={activePhoto.id}>
-                  <img src={activePhoto.src} alt={activePhoto.title} loading="lazy" decoding="async" />
-                  <div className="home__photo-sweep-shine" />
+                <figure className="home__photo-sweep-frame" key={activePhoto.id}>
+                  <ResponsiveImage
+                    src={activePhoto.src}
+                    alt={activePhoto.title}
+                    loading="lazy"
+                    decoding="async"
+                    sizes="(min-width: 1280px) calc(100vw - 596px), 100vw"
+                  />
+                  <div className="home__photo-sweep-shine" aria-hidden="true" />
                   <figcaption>
                     <span>{activePhoto.id}</span>
                     <strong>{activePhoto.title}</strong>
                     <small>{activePhoto.mood}</small>
                   </figcaption>
-                </div>
+                </figure>
 
                 <div className="home__photo-sweep-dots" aria-label="photo_roll status">
                   {photoRoll.map((photo, index) => (
@@ -117,6 +124,7 @@ export default function Home() {
                       type="button"
                       className={index === activePhotoIndex ? "is-active" : ""}
                       aria-label={`show ${photo.title}`}
+                      aria-pressed={index === activePhotoIndex}
                       onClick={() => setActivePhotoIndex(index)}
                     />
                   ))}

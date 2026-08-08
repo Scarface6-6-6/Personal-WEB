@@ -1,6 +1,6 @@
-.redesGrid {
+﻿.redesGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: 1fr;
   gap: 1rem;
 }
 
@@ -15,8 +15,8 @@
   margin-top: 1rem;
 }
 
-@media (max-width: 860px) {
+@media (min-width: 768px) {
   .redesGrid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr));
   }
 }

@@ -7,8 +7,8 @@ export default function SocialRail() {
   };
 
   return (
-    <aside className="social-rail">
-      <div className="social-line" />
+    <aside className="social-rail" aria-label="social links">
+      <div className="social-line" aria-hidden="true" />
 
       <div className="social-icons">
         {SOCIAL_ITEMS.map((item) =>
@@ -20,7 +20,7 @@ export default function SocialRail() {
               className="social-link"
               onClick={() => copyUsername(item)}
             >
-              <img src={item.icon} alt={item.label} />
+              <img src={item.icon} alt="" width="28" height="28" aria-hidden="true" />
             </button>
           ) : (
             <a
@@ -31,7 +31,7 @@ export default function SocialRail() {
               aria-label={item.label}
               className="social-link"
             >
-              <img src={item.icon} alt={item.label} />
+              <img src={item.icon} alt="" width="28" height="28" aria-hidden="true" />
             </a>
           )
         )}

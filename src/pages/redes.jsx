@@ -41,7 +41,7 @@ export default function Redes() {
         {socialLinks.map((link) => (
           <TerminalCard key={link.id}>
             <TerminalCommand>{link.command}</TerminalCommand>
-            <img className={styles.redesIcon} src={link.icon} alt={link.title} />
+            <img className={styles.redesIcon} src={link.icon} alt={link.title} width="32" height="32" loading="lazy" decoding="async" />
             <h3>{link.title}</h3>
             <p>{link.description}</p>
             {link.username && <StatusBadge>{link.username}</StatusBadge>}

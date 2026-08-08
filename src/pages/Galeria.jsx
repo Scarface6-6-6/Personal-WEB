@@ -1,5 +1,6 @@
 ﻿import { useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { ResponsiveImage } from "../components/ResponsiveImage/ResponsiveImage";
 import { CommandButton } from "../components/terminal/CommandButton";
 import { TerminalCard } from "../components/terminal/TerminalCard";
 import { TerminalCommand } from "../components/terminal/TerminalCommand";
@@ -53,8 +54,20 @@ export default function Galeria() {
 
       {activePhoto && (
         <section className={styles.galleryStage}>
-          <button type="button" className={styles.heroFrame} onClick={() => setSelectedPhoto(activePhoto)}>
-            <img src={activePhoto.src} alt={activePhoto.title} />
+          <button
+            type="button"
+            className={styles.heroFrame}
+            aria-label={`${content.momentLabel}: ${activePhoto.title}`}
+            onClick={() => setSelectedPhoto(activePhoto)}
+          >
+            <ResponsiveImage
+              src={activePhoto.src}
+              alt={activePhoto.title}
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
+              sizes="(min-width: 1024px) 62vw, 100vw"
+            />
             <span>{content.momentLabel}: {activePhoto.id}</span>
           </button>
 
@@ -79,6 +92,7 @@ export default function Galeria() {
               key={category}
               type="button"
               className={category === activeCategory ? styles.activeCategory : ""}
+              aria-pressed={category === activeCategory}
               onClick={() => setActiveCategory(category)}
             >
               {category === bestMomentsCategory ? content.bestMomentsLabel : content.categories[category]}
@@ -87,7 +101,7 @@ export default function Galeria() {
         </div>
       </TerminalCard>
 
-      <section className={styles.momentGrid}>
+      <section className={styles.momentGrid} data-category={activeCategory}>
         {activeCategory === "concerts"
           ? Object.entries(groupedConcerts).map(([artist, photos]) => (
               <TerminalCard key={artist} className={styles.timelineCard}>
@@ -100,10 +114,18 @@ export default function Galeria() {
                         key={photo.id}
                         type="button"
                         className={photo.id === activePhoto?.id ? styles.activePhoto : ""}
+                        aria-label={`${content.momentLabel}: ${photo.title}`}
+                        aria-pressed={photo.id === activePhoto?.id}
                         onClick={() => setActivePhotoId(photo.id)}
                         onDoubleClick={() => setSelectedPhoto(photo)}
                       >
-                        <img src={photo.src} alt={photo.title} />
+                        <ResponsiveImage
+                          src={photo.src}
+                          alt={photo.title}
+                          loading="lazy"
+                          decoding="async"
+                          sizes="(min-width: 1024px) 220px, (min-width: 480px) 50vw, 100vw"
+                        />
                         <span>{photo.id}</span>
                       </button>
                     ))}
@@ -123,10 +145,18 @@ export default function Galeria() {
                           key={photo.id}
                           type="button"
                           className={photo.id === activePhoto?.id ? styles.activePhoto : ""}
+                          aria-label={`${content.momentLabel}: ${photo.title}`}
+                          aria-pressed={photo.id === activePhoto?.id}
                           onClick={() => setActivePhotoId(photo.id)}
                           onDoubleClick={() => setSelectedPhoto(photo)}
                         >
-                          <img src={photo.src} alt={photo.title} />
+                          <ResponsiveImage
+                            src={photo.src}
+                            alt={photo.title}
+                            loading="lazy"
+                            decoding="async"
+                            sizes="(min-width: 1024px) 220px, (min-width: 480px) 50vw, 100vw"
+                          />
                           <span>{photo.id}</span>
                         </button>
                       ))}
@@ -146,10 +176,18 @@ export default function Galeria() {
                           key={photo.id}
                           type="button"
                           className={photo.id === activePhoto?.id ? styles.activePhoto : ""}
+                          aria-label={`${content.momentLabel}: ${photo.title}`}
+                          aria-pressed={photo.id === activePhoto?.id}
                           onClick={() => setActivePhotoId(photo.id)}
                           onDoubleClick={() => setSelectedPhoto(photo)}
                         >
-                          <img src={photo.src} alt={photo.title} />
+                          <ResponsiveImage
+                            src={photo.src}
+                            alt={photo.title}
+                            loading="lazy"
+                            decoding="async"
+                            sizes="(min-width: 1024px) 220px, (min-width: 480px) 50vw, 100vw"
+                          />
                           <span>{photo.id}</span>
                         </button>
                       ))}
@@ -162,8 +200,14 @@ export default function Galeria() {
 
       {selectedPhoto && (
         <div className={styles.modalBackdrop} role="presentation" onClick={() => setSelectedPhoto(null)}>
-          <TerminalCard className={styles.photoModal}>
-            <img src={selectedPhoto.src} alt={selectedPhoto.title} />
+          <TerminalCard className={styles.photoModal} onClick={(event) => event.stopPropagation()}>
+            <ResponsiveImage
+              src={selectedPhoto.src}
+              alt={selectedPhoto.title}
+              loading="lazy"
+              decoding="async"
+              sizes="(min-width: 1024px) 60vw, 100vw"
+            />
             <div>
               <TerminalCommand>{content.metadataTitle}</TerminalCommand>
               <h3>{selectedPhoto.title}</h3>

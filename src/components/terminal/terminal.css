@@ -1,4 +1,4 @@
-.terminal-shell {
+﻿.terminal-shell {
   width: min(1100px, 100%);
   margin: 0 auto;
   display: grid;
@@ -7,7 +7,7 @@
 
 .terminal-grid {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 1rem;
 }
 
@@ -15,7 +15,7 @@
   margin: 0;
   color: var(--green);
   font-family: "Courier New", monospace;
-  font-size: 0.95rem;
+  font-size: clamp(0.86rem, 2.8vw, 0.95rem);
   line-height: 1.7;
 }
 
@@ -29,7 +29,7 @@
 
 .terminal-card {
   position: relative;
-  padding: 1.25rem;
+  padding: clamp(1rem, 4vw, 1.25rem);
   border: 1px solid var(--border);
   border-radius: 8px;
   background:
@@ -63,7 +63,7 @@
   white-space: pre-wrap;
   color: var(--muted);
   font-family: "Courier New", monospace;
-  font-size: 0.95rem;
+  font-size: clamp(0.86rem, 2.8vw, 0.95rem);
   line-height: 1.7;
 }
 
@@ -116,6 +116,7 @@
 .command-button {
   display: inline-flex;
   width: fit-content;
+  min-height: 44px;
   align-items: center;
   justify-content: center;
   padding: 0.65rem 0.9rem;
@@ -129,7 +130,8 @@
   transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
 }
 
-.command-button:hover {
+.command-button:hover,
+.command-button:focus-visible {
   border-color: rgba(167, 107, 255, 0.7);
   background: rgba(167, 107, 255, 0.2);
   transform: translateY(-1px);
@@ -183,13 +185,8 @@
   }
 }
 
-@media (max-width: 860px) {
+@media (min-width: 768px) {
   .terminal-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .terminal-command,
-  .terminal-card pre {
-    font-size: 0.88rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }

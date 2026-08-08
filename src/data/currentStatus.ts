@@ -1,13 +1,9 @@
-import { getSupportedLanguage } from "./language";
+﻿import { getSupportedLanguage } from "./language";
 
 const currentStatusByLanguage = {
   en: {
     learning: ["audiophilia", "web development", "masonry", "system architecture"],
-    building: [
-      "scarface-666.pw",
-      "better physique",
-      "fixing and conditioning the apartment where I live"
-    ],
+    building: ["scarface-666.pw", "better physique", "SWIFT payments", "personal growth", "self-care"],
     listening: [
       "Pink Floyd",
       "Milo Mae",
@@ -24,11 +20,7 @@ const currentStatusByLanguage = {
   },
   es: {
     learning: ["audiofilia", "desarrollo web", "albañilería", "arquitectura de sistemas"],
-    building: [
-      "scarface-666.pw",
-      "mejorar mi físico",
-      "arreglar y acondicionar el departamento donde vivo"
-    ],
+    building: ["scarface-666.pw", "mejorar mi físico", "pagos SWIFT", "crecimiento personal", "autocuidado"],
     listening: [
       "Pink Floyd",
       "Milo Mae",
